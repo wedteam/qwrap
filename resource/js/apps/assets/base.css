@@ -1,0 +1,92 @@
+/*
+Copyright: QW.
+version: 0.0.1
+remark: most code is copy from baidu c2c
+*/
+
+/*reset font*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,textarea,select,optgroup,option,fieldset,legend,p,blockquote,th,td {margin: 0;padding: 0;}
+fieldset,img {border: 0;}
+address,caption,cite,code,dfn,em,th,var,optgroup {font-style: normal;font-weight: normal;}
+ins {text-decoration: none;}
+li {list-style: none;}
+table {font-size:inherit;font:100%;}
+caption,th {text-align: left;}
+h1,h2,h3,h4,h5,h6 {font-size: 100%;}
+q:before,q:after {content:'';}
+abbr,acronym {border: 0;font-variant: normal;}
+legend {color: #000;}
+input,button,textarea,select,optgroup,option {font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;}
+input,button,textarea,select {margin:0;*font-size: 100%;line-height:1.3;}
+img {-ms-interpolation-mode:bicubic;}
+html,body {height:100%;}
+body {font:12px/1.5 arial,helvetica,sans-serif;text-align:center;color: #000;background: #FFF;}
+
+/*richtext(restore font)*/
+.richtext {font-size:12px;width:100%;overflow:hidden;position:relative;}
+.richtext h1 {font-size:18px;}
+.richtext h2 {font-size:16px;}
+.richtext h3 {font-size:14px;}
+.richtext h1,.richtext h2,.richtext h3 {margin:12px 0;}
+.richtext abbr,.richtext acronym {border-bottom:1px dotted #000;cursor:help;} 
+.richtext em {font-style:italic;}
+.richtext blockquote,.richtext ul,.richtext ol,.richtext dl {margin:12px;}
+.richtext ol,.richtext ul,.richtext dl {margin-left:24px;}
+.richtext ol li {list-style: decimal outside;}
+.richtext ul li {list-style: disc outside;}
+.richtext dl dd {margin-left:12px;}
+.richtext th,.richtext td {border:1px solid #000;padding:6px;}
+.richtext th {font-weight:bold;text-align:center;}
+.richtext caption {margin-bottom:6px;text-align:center;}
+.richtext p,.richtext fieldset,.richtext table,.richtext pre {margin-bottom:12px;}
+.richtext img {vertical-align:bottom;}
+
+/* drag */
+.drag-proxy {display:none;position:absolute; z-index:999999; border:2px dashed #999;}
+.proxy-dragging {display:block;}
+
+/*
+layout
+#doc1 - 100% fluid width also sets 10px of left and right margin 
+#doc2 - 760px
+#doc3 - 950px
+*/
+#doc1,#doc2,#doc3 { margin:auto;text-align:left;min-width:760px;zoom:1;font-size:100%;}
+#doc1 {margin:auto 10px;}
+#doc2 {width:760px;}
+#doc3 {width:950px;}
+
+h1.page-h1 {font-weight:bold;color:#555;background-color:#def;border:1px solid #cdf;line-height:2.0;font-size:105%;}
+#hd,#bd,#ft{}
+#ft{text-align:center;margin-top:26px;border-top:1px solid #cde;}
+
+
+.w160 {width:160px;}
+.w200 {width:200px;}
+.w240 {width:240px;}
+
+/*left fixed layout*/
+
+/*section*/
+.section-ctn {border:1px solid #3d3; padding:5px;margin-top:15px;zoom:1;}
+.section-hd {font-weight:bold;margin:3px 0;border-bottom:solid #cdf 1px;}
+.section-bd {}
+.section-btn-ctn {text-align:right;padding-right:15px}
+
+/*table*/
+table.attr-tbl {width:100%;margin:auto;border-collapse:collapse;}
+table.attr-tbl td.attr-name {width:20%;background-color:#dde;border:1px solid #ccc;padding:2px;text-align:center;font-weight:bold;}
+table.attr-tbl td.attr-content1 {width:30%;border:1px solid #ccc;padding:2px;}
+table.attr-tbl td.attr-content {border:1px solid #ccc;padding:2px;}
+
+table.list {width:100%;margin:auto;border-collapse:collapse;}
+table.list th {background-color:#FEFECF;border:1px solid #ccc;padding:2px;text-align:center;font-weight:bold;}
+table.list td {border:1px solid #ccc;padding:2px;text-align:center;}
+
+/*self clear*/
+#hd,#bd,#ft,.sect-l,.sect-r,.cls {zoom:1;}
+#hd:after,#bd:after,#ft:after,.sect-l:after,.sect-r:after,.cls:after {content:".";display:block;visibility:hidden;height:0;clear:both;}
+
+/* code */
+textarea.code {display: block;font-family: Courier New;font-size: 12px;height: 114px;padding: 3px;width: 100%;}
+div.code_highlight {background-color: #EEEEEE;border: 1px solid #CCCCCC;height: 120px;overflow: auto;width: 100%;}

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>小球落地---Jerry Qu</title>
+	<script type="text/javascript" src="../../../apps/core_dom_youa.js"></script>
+	<script type="text/javascript" src="../../../components/anim/anim.js"></script>
+    <style type="text/css" title="default" media="screen">
+    /*<![CDATA[*/
+
+    /*]]>*/
+    </style>
+    </head>
+	<body>
+		<h3>点击小球</h3>
+		<div id="test1" style="cursor:pointer;position:absolute;top:50px;left:20px;width:64px;height:64px;background:url(img/ball.png)"></div>
+		<script type="text/javascript">
+			var ElAnim = QW.ElAnim,
+				Dom = QW.Dom,
+				NodeW = QW.NodeW,
+				g = Dom.g;
+
+			var anim1 = new ElAnim("test1", {
+				"top" : {
+					by : 350
+				}
+			}, 3000, QW.Easing.bounceOut);
+
+			//addEventlistener
+			W.g("test1").on("click", function(){
+				anim1.play();
+				
+				setTimeout(function(){
+					anim1.reset();
+				}, 3500);
+			});
+		</script>
+	</body>
+</html>

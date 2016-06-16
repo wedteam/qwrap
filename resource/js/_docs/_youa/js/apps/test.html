@@ -1,0 +1,30 @@
+<HTML><HEAD><TITLE>JK Test</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+<script srcccc="qwrap.js"></script>
+<script srcccc="../../../../../_references/frameworks/jquery/jquery-1.4.2.js" type="text/javascript"></script>  
+<script srcccc="http://common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script srcccc="http://dev.qwrap.com/resource/js/apps/qwrap.js" type="text/javascript"></script>  
+<script src="../../../../../js/apps/qwrap.js" type="text/javascript"></script>  
+
+
+<style>
+div{border:1px solid balck;padding:5px;margin:2px;}
+</style>
+</HEAD>
+<body>
+<div id="div1" >div1
+	<div id="div1_1" >div1_1
+		<div id="div1_1_1" >div1_1_1
+			<span style="color:red">span</span>
+		</div>
+	</div>
+	<div id="div1_2" >div1_2
+	</div>
+	<div id="div1_3" >div1_3
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+W('body').query('body #div1_1').css('color','red');//点击span时，应该出现alert的
+</script>
+</HTML>

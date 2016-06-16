@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Slide - scroll</title>
+	<link href="../../../apps/assets/base.css" rel="stylesheet" type="text/css" media="screen"/>
+	<style>
+		/* 轮播广告 */
+		.picslide {	background-color:#E5E5E5; padding:3px;width:407px;margin:5px;float:left;position:relative;}
+		.picslide ul.text {padding:1px; }
+		.picslide ul.text li {border-left: 1px solid #DCDCDC; float: left; text-align: center;}
+		.picslide ul.text li span {cursor: pointer;display: block;height: 28px;line-height: 28px;width: 75px;}
+		.picslide ul.text li.preselected span {background-color: #e99;}
+		.picslide ul.text li.selected span {background-color: #f66;color: #FFFFFF;cursor: default;}
+		.picslide ul.pic {border: 1px solid #DCDCDC; }
+		.picslide ul.pic li img {height: 220px; width: 405px; }
+		
+		#picslide1 ul.pic {width:2100px;}
+		#picslide1 ul.pic li {display:inline-block;*display:inline;zoom:1}
+
+
+	</style>
+	<script type="text/javascript" src="../../../apps/qwrap.js"></script>
+	<script type="text/javascript" src="../../../components/switch/switch_retouched.js"></script>
+</head>
+<div id=doc3>
+	<div id="bd" >
+		<div class="section-ctn">
+			<h3 class="section-hd" >水平滑动幻灯片</h3>
+			<div class="cls">
+				<div class="picslide widget-slide" id="picslide1" data-jss="animType:'scroll'">
+					<div id="picslide1_scroll_div" style="overflow:hidden;width:405px;height:220px;">
+					<ul class="pic slide-content">
+						<li class="selected"><a href="#"><img src="img/1.jpg"></a></li> 
+						<li ><a href="#"><img src="img/2.jpg"></a></li> 
+						<li ><a href="#"><img src="img/3.jpg"></a></li> 
+						<li ><a href="#"><img src="img/4.jpg"></a></li> 
+					</ul>
+					</div>
+					<ul class="text slide-nav cls">
+						<li class="selected first"><span>文字信息1</span></li>
+						<li><span>文字信息2</span></li>
+						<li><span>文字信息3</span></li>
+						<li><span>文字信息4</span></li>
+					</ul>
+					<div style="position:absolute; bottom:5px; right:10px; font-size:16px; font-weight:bold; color:blue; cursor:pointer;"> <span class="slide-pageup" style="margin-right:20px"> &lt; </span> <span class="slide-pagedown"> &gt; </span></div>
+				</div>
+			</div>
+		</div>
+	</div> 
+	<div id="ft">
+		QWrap (<a href="http://www.qwrap.com">www.qwrap.com</a>)
+	</div>
+
+</div>
+</body> 
+</html>

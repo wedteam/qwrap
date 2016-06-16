@@ -1,0 +1,510 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+ <title>QWrap JS 编码规范</title>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+ <link type="text/css" rel="stylesheet" href="jsguide.files/ph_core.css">
+
+ <style>
+/*base*/
+a:link { color: #0000cc; }
+body { background: #fff; margin: 3px 8px;}
+body, select, input { font-family: arial, sans-serif;}
+body { font-size: 83%;}
+td td, th th, th td, td th { font-size: 100%;}
+pre { font-size: 110%;}
+form { padding:0; margin:0;}
+table { border-collapse: separate; }
+
+#doc1,#doc2,#doc3 { margin:auto;text-align:left;min-width:760px;zoom:1;font-size:100%;}
+#doc1 {margin:auto 10px;}
+#doc2 {width:760px;}
+#doc3 {width:950px;}
+
+#hd,#bd,#ft{}
+#ft{text-align:center;margin-top:26px;border-top:1px solid #cde;}
+
+/*#wikicontent*/
+#wikicontent h3, #wikipreview h3 {
+  background: none;
+  border: 0;
+  padding-left:0;
+  margin: 0;
+}
+
+#wikicontent ul, #wikicontent ol { padding-left: 40px; }
+
+#wikicontent tt { font-size: 120%; }
+
+a.section_anchor {  display: none; text-decoration: none; margin-left: .7em; font-weight: lighter; font-size: 85%; }
+h1:hover a.section_anchor, h2:hover a.section_anchor, h3:hover a.section_anchor,
+h4:hover a.section_anchor, h5:hover a.section_anchor, h6:hover a.section_anchor { display: inline; color: #bbb; }
+h1 a.section_anchor:hover, h2 a.section_anchor:hover, h3 a.section_anchor:hover,
+h4 a.section_anchor:hover, h5 a.section_anchor:hover, h6 a.section_anchor:hover { color: #33c; }
+
+pre.prettyprint {
+  margin-left: 2em;
+  padding: 0.5em;
+  border-left: 3px solid #ccc;
+}
+
+.prettyprint .str { color: #080; }
+.prettyprint .kwd { color: #008; }
+.prettyprint .com { color: #800; }
+.prettyprint .typ { color: #606; }
+.prettyprint .lit { color: #066; }
+.prettyprint .pun { color: #660; }
+.prettyprint .pln { color: #000; }
+.prettyprint .tag { color: #008; }
+.prettyprint .atn { color: #606; }
+.prettyprint .atv { color: #080; }
+.prettyprint .dec { color: #606; }
+
+@media print {
+  .prettyprint .str { color: #060; }
+  .prettyprint .kwd { color: #006; font-weight: bold; }
+  .prettyprint .com { color: #600; font-style: italic; }
+  .prettyprint .typ { color: #404; font-weight: bold; }
+  .prettyprint .lit { color: #044; }
+  .prettyprint .pun { color: #440; }
+  .prettyprint .pln { color: #000; }
+  .prettyprint .tag { color: #006; font-weight: bold; }
+  .prettyprint .atn { color: #404; }
+  .prettyprint .atv { color: #060; }
+}
+
+ </style>
+</head>
+<body class="t6">
+<div id="doc3">
+ <div id="wikicontent">
+
+
+ <h1>
+  <a name="QWrap_Javascript_编程规范"></a>
+  QWrap JS 编码规范 <a href="#QWrap_Javascript_编程规范" class="section_anchor">&para;</a>
+ </h1>
+
+ <h2>
+  <a name="前言"></a>
+  前言 <a href="#前言" class="section_anchor">&para;</a>
+ </h2>
+ <p>本文参考1：Dojo Javascript 编程规范： <a href="http://dojotoolkit.org/developer/StyleGuide" rel="nofollow">http://dojotoolkit.org/developer/StyleGuide</a> 。<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中文版：<a href="http://code.google.com/p/grace/wiki/DojoStyle" rel="nofollow">http://code.google.com/p/grace/wiki/DojoStyle</a>。 </p>
+ <p>本文参考2：…… </p>
+ <p>本文说明：本文仅用于QWrap javascript编译规范建议，转发请注明出处 </p>
+ <p>Created by JK at 2010-10-20。</p>
+
+ <h2>
+  <a name="序"></a>
+  序<a href="#序" class="section_anchor">&para;</a>
+ </h2>
+ <p style="color:red;">所有的代码都应该是他人容易阅读的。 </p>
+
+ <h2>
+  <a name="快读参考"></a>
+  快读参考<a href="#快读参考" class="section_anchor">&para;</a>
+ </h2>
+ <p>核心 API 请使用下面的风格： </p>
+ <p>
+  <table>
+   <tr>
+    <td style="border: 1px solid #aaa; padding: 5px;"> <strong>结构</strong> </td>
+	<td style="border: 1px solid #aaa; padding: 5px;"> <strong>规则</strong> </td>
+	<td style="border: 1px solid #aaa; padding: 5px;"> <strong>备注</strong> </td>
+   </tr>
+   <tr>
+    <td style="border: 1px solid #aaa; padding: 5px;">模块</td>
+	<td style="border: 1px solid #aaa; padding: 5px;">小写</td>
+	<td style="border: 1px solid #aaa; padding: 5px;">不要使用多重语义（Never multiple words）</td>
+   </tr>
+   <tr>
+    <td style="border: 1px solid #aaa; padding: 5px;">文件名</td>
+	<td style="border: 1px solid #aaa; padding: 5px;">小写</td>
+	<td style="border: 1px solid #aaa; padding: 5px;">Helper/Util/Wrap/Config文件分别以.h/.u/.w/.c结尾</td>
+   </tr>
+   <tr>
+    <td style="border: 1px solid #aaa; padding: 5px;">类</td>
+	<td style="border: 1px solid #aaa; padding: 5px;">驼峰</td>
+	<td style="border: 1px solid #aaa; padding: 5px;">&nbsp;</td>
+   </tr>
+   <tr>
+    <td style="border: 1px solid #aaa; padding: 5px;">公有方法</td>
+	<td style="border: 1px solid #aaa; padding: 5px;">混合</td>
+	<td style="border: 1px solid #aaa; padding: 5px;">“混合”指“首字母小写的驼峰”</td>
+   </tr>
+   <tr>
+    <td style="border: 1px solid #aaa; padding: 5px;">公有属性</td>
+	<td style="border: 1px solid #aaa; padding: 5px;">混合</td>
+	<td style="border: 1px solid #aaa; padding: 5px;">&nbsp;</td>
+   </tr>
+   <tr>
+    <td style="border: 1px solid #aaa; padding: 5px;">私有方法/属性</td>
+	<td style="border: 1px solid #aaa; padding: 5px;">'_'+混合 </td>
+	<td style="border: 1px solid #aaa; padding: 5px;">&nbsp;</td>
+   </tr>
+   <tr>
+    <td style="border: 1px solid #aaa; padding: 5px;">侵入型私有属性</td>
+	<td style="border: 1px solid #aaa; padding: 5px;">'__'+混合 </td>
+	<td style="border: 1px solid #aaa; padding: 5px;">侵入型私有属性是指在别的对象上偷偷添加，给自己用的私有属性。需要尽量避免本类属性</td>
+   </tr>
+   <tr>
+    <td style="border: 1px solid #aaa; padding: 5px;">变量</td>
+	<td style="border: 1px solid #aaa; padding: 5px;">混合<tt></tt></td>
+ 	<td style="border: 1px solid #aaa; padding: 5px;">&nbsp;</td>
+  </tr>
+   <tr>
+    <td style="border: 1px solid #aaa; padding: 5px;">常量</td>
+	<td style="border: 1px solid #aaa; padding: 5px;">驼峰 或 大写 (大写时里面可以包含_)</td>
+	<td style="border: 1px solid #aaa; padding: 5px;">&nbsp;</td>
+   </tr>
+  </table>
+ </p>
+ <p>下面的虽然不是必要的，但建议使用： </p>
+ <p>
+  <table>
+   <tr>
+    <td style="border: 1px solid #aaa; padding: 5px;"> <strong>结构</strong> </td>
+	<td style="border: 1px solid #aaa; padding: 5px;"> <strong>规则</strong> </td>
+	<td style="border: 1px solid #aaa; padding: 5px;"> <strong>备注</strong> </td>
+   </tr>
+   <tr>
+    <td style="border: 1px solid #aaa; padding: 5px;">命名空间</td>
+	<td style="border: 1px solid #aaa; padding: 5px;">驼峰</td>
+	<td style="border: 1px solid #aaa; padding: 5px;">&nbsp;</td>
+   </tr>
+   </table>
+ </p>
+
+ <h2>
+  <a name="命名规范"></a>
+  命名规范<a href="#命名规范" class="section_anchor">&para;</a>
+ </h2>
+ <ol>
+  <li>变量名称 <i>必须为</i> 混合命名(首字母小写的驼峰命名)。 </li>
+  <li>类的命名使用驼峰命名规则，例如： </li>
+<pre class="prettyprint">Account, EventHandler</pre>
+  <li>常量 <i>必须</i> 在对象（类）或者枚举变量的前部声明。枚举变量的命名必须要有实际的意义，并且其成员 <i>必须</i> 使用驼峰命名规则或使用大写： </li>
+<pre class="prettyprint">var NodeTypes = {
+	Element: 1,
+	DOCUMENT: 2
+}</pre>
+  <li>简写单词 <i>不能使用</i> 大写名称作为变量名： </li>
+<pre class="prettyprint">getInnerHtml(), getXml(), XmlDocument</pre>
+  <li>方法的命令 <i>必须</i> 为动词或者是动词短语： </li>
+<pre class="prettyprint">obj.getSomeValue()</pre>
+  <li>类的命名 <i>必须</i> 使用驼峰命名。 </li>
+  <li>静态变量与属性 <i>必须</i> 使用驼峰命名或全部大写。 </li>
+  <li>公有方法与属性 <i>必须</i> 使用混合名称（mixedCase）命名。 </li>
+  <li>私有变量与属性 <i>必须</i> 使用混合名称（mixedCase）命名，并前面下下划线（<tt>_</tt>）。例如： </li>
+<pre class="prettyprint">var MyClass = function() {
+	this.doSomething = function(){
+	};
+}</pre>
+<pre class="prettyprint">this._somePrivateVariable = statement;</pre>
+  <li>通用的变量 <i>必须</i> 使用与其名字一致的类型名称： </li>
+<pre class="prettyprint">setTopic(topic) // 变量 topic 为 Topic 类型的变量</pre>
+  <li>所有的变量名 <i>必须</i> 使用英文名称。 </li>
+  <li>变量如有较广的作用域（large scope），必须使用全局变量；此时可以设计成一个类的成员。相对的如作用域较小或为私有变量则使用简洁的单词命名。 </li>
+  <li>公有变量必须清楚的表达其自身的属性，避免字义含糊不清，例如： </li>
+<pre class="prettyprint">MouseEventHandler，而非 MseEvtHdlr。</pre>
+  <li>类/构造函数 <i>可以使用</i> 扩展其基类的名称命名，这样可以正确、迅速的找到其基类的名称： </li>
+<pre class="prettyprint">EventHandler
+UIEventHandler
+MouseEventHandler</pre>
+  <blockquote>基类可以在明确描述其属性的前提下，缩减其命名： 
+<pre class="prettyprint">MouseEventHandler as opposed to MouseUIEventHandler.</pre>
+  </blockquote>
+ </ol>
+
+ <h2>
+  <a name="特殊命名规范"></a>
+  特殊命名规范<a href="#特殊命名规范" class="section_anchor">&para;</a>
+ </h2>
+ <ol>
+  <li>术语 &quot;get/set&quot; 不要和一个字段相连，除非它被定义为私有变量。 </li>
+  <li>前面加 &quot;is&quot; 的变量名 <i>应该</i> 为布尔值，同理可以为 &quot;has&quot;, &quot;can&quot; 或者 &quot;should&quot;。 </li>
+  <li>重复变量建议使用 &quot;i&quot;, &quot;j&quot;, &quot;k&quot; （依次类推）等名称的变量。 </li>
+  <li>补充用语必须使用补充词，例如： get/set, add/remove, create/destroy, start/stop, insert/delete, begin/end, etc. </li>
+  <li>能缩写的名称尽量使用缩写。 </li>
+  <li>避免产生歧义的布尔变量名称，例如： </li>
+<pre class="prettyprint">isNotError, isNotFound 为非法</pre>
+  <li>方法如果返回一个类，则应该在名称上说明返回什么；如果是一个过程，则应该说明做了什么。 </li>
+  <li>一些常用的变量命名或缩写： </li>
+  <ul>
+   <li>e	:	event</li>
+   <li>el	:	element</li>
+   <li>pEl	:	parentElement,父节点对象</li>
+   <li>ex	:	exception</li>
+   <li>arr	:	array</li>
+   <li>o	:	object,对象</li>
+   <li>fun	:	function</li>
+   <li>hdl	:	handle,通常是事件函数</li>
+   <li>json	:	json对象</li>
+   <li>opts	:	options:由参数组成的json</li>
+   <li>coll	:	collection,集合或数组</li>
+   <li>ctx	:	context,上下文</li>
+   <li>ctn	:	container,容器</li>
+   <li>src	:	source/src,源头/src</li>
+   <li>w	:	width</li>
+   <li>h	:	height</li>
+  </li>
+ </ol>
+
+ <h2>
+  <a name="文件"></a>
+  文件<a href="#文件" class="section_anchor">&para;</a>
+ </h2>
+ <ol>
+  <li>缩进请使用"	"(制表位)。</li>
+  <li>代码折叠必须看起来是完成并且是合乎逻辑的： </li>
+<pre class="prettyprint">var someExpression = Expression1
+	+ Expression2
+	+ Expression3;
+
+var o = someObject.get(
+	Expression1,
+	Expression2,
+	Expression3
+);</pre>
+  <blockquote>注：表达式的缩进与变量声明应为一致的。 </blockquote>
+  <blockquote>注：函数的参数应采用明确的缩进，缩进规则与其他块保持一致。 </blockquote>
+  <li>js里的字符串，最外层尽量用'，HTML里的字符串，最外层用"。 </li>
+<pre class="prettyprint">document.getElementById('myId').innerHTML='&lt;input name="price" value="10"/&gt;';</pre>
+<pre class="prettyprint">&lt;input type=button value="ok" onclick="alert('ok!');"/&gt;</pre>
+ </ol>
+
+ <h2>
+  <a name="变量"></a>
+  变量<a href="#变量" class="section_anchor">&para;</a>
+ </h2>
+ <ol>
+  <li>变量必须在声明初始化以后才能使用，即便是 NULL 类型。  </li>
+  <li>变量不能产生歧义。 </li>
+  <li>相关的变量集应该放在同一代码块中，非相关的变量集不应该放在同一代码块中。 </li>
+  <li>变量应该尽量保持最小的生存周期。 </li>
+  <li>循环/重复变量的规范：  </li>
+  <ol>
+   <li>只有循环控制块的话，则必须使用 FOR 循环。 </li>
+   <li>循环变量应该在循环开始前就被初始化；如使用 FOR 循环，则使用 FOR 语句初始化循环变量。 </li>
+   <li>&quot;do ... while&quot; 语句是被允许的。 </li>
+   <li>&quot;break&quot; 和 &quot;continue&quot; 语句仍然允许使用（但请注意）。 </li>
+  </ol>
+  <li>条件表达式 </li>
+  <ol>
+   <li>应该尽量避免复杂的条件表达式，如有必要可以使用临时布尔变量。 </li>
+   <li>应避免在条件表达式中加入块。 </li>
+  </ol>
+  <li>杂项 </li>
+  <ol>
+   <li>浮点变量必须指明实部，即使它们为零（使用 0. 开头）。</li>
+  </ol>
+ </ol>
+
+ <h2>
+  <a name="布局"></a>
+  布局<a href="#布局" class="section_anchor">&para;</a>
+ </h2>
+
+ <h3>
+  <a name="块"></a>
+  块<a href="#块" class="section_anchor">&para;</a>
+ </h3>
+ <ol>
+  <li>普通代码段 <i>应该</i> 看起来如下： </li>
+<pre class="prettyprint">while (!isDone) {
+	doSomething();
+	isDone = moreToDo();
+}</pre>
+  <li>IF 语句  <i>应该</i> 看起来像这样： </li>
+<pre class="prettyprint">if (someCondition) {
+	statements;
+} else if (someOtherCondition){
+	statements;
+} else {
+	statements;
+}</pre>
+  <li>FOR 语句 <i>应该</i> 看起来像这样： </li>
+<pre class="prettyprint">for (initialization; condition; update) {
+	statements;
+}</pre>
+  <li>WHILE 语句 <i>应该</i> 看起来像这样： </li>
+<pre class="prettyprint">while (!isDone) {
+	doSomething();
+	isDone = moreToDo();
+}</pre>
+  <li>DO ... WHILE 语句 <i>应该</i> 看起来像这样： </li>
+<pre class="prettyprint">do {
+	statements;
+} while (condition);</pre>
+  <li>SWITCH 语句 <i>应该</i> 看起来像这样： </li>
+<pre class="prettyprint">switch (condition) {
+	case ABC:
+		statements;
+		// fallthrough
+	case DEF:
+		statements;
+		break;
+	default:
+		statements;
+		break;
+}</pre>
+  <li>TRY ... CATCH 语句 <i>应该</i> 看起来像这样： </li>
+<pre class="prettyprint">try {
+	statements;
+} catch(ex) {
+	statements;
+} finally {
+	statements;
+}</pre>
+  <li>单行的 IF - ELSE，WHILE 或者 FOR 语句也 <i>必须</i> 加入括号，不过他们可以这样写： </li>
+<pre class="prettyprint">if (condition) { statement; }
+while (condition) { statement; }
+for (intialization; condition; update) { statement; }</pre>
+ </ol>
+
+ <h3>
+  <a name="空白"></a>
+  空白<a href="#空白" class="section_anchor">&para;</a>
+ </h3>
+ <ol>
+  <li>操作符 <i>建议</i> 使用空格隔开（包括三元操作符）。 </li>
+  <li>下面的关键字 <i>避免使用</i> 空白隔开： </li>
+  <ul>
+   <li>break </li>
+   <li>catch </li>
+   <li>continue </li>
+   <li>do </li>
+   <li>else </li>
+   <li>finally </li>
+   <li>for </li>
+   <li>function （如果为匿名函数，例如：var foo = function(){}; ） </li>
+   <li>if </li>
+   <li>return </li>
+   <li>switch </li>
+   <li>this </li>
+   <li>try </li>
+   <li>void </li>
+   <li>while </li>
+   <li>with </li>
+  </ul>
+  <li>下面的关键字必须使用空白隔开： </li>
+  <ul>
+   <li>case </li>
+   <li>default </li>
+   <li>delete </li>
+   <li>function （如果为申明，例如：function foo(){}; ） </li>
+   <li>in </li>
+   <li>instanceof </li>
+   <li>new </li>
+   <li>throw </li>
+   <li>typeof </li>
+   <li>var </li>
+  </ul>
+  <li><strong>逗号（,）</strong> <i>建议</i> 使用空白隔开。 </li>
+  <li><strong>冒号（:）</strong> <i>建议</i> 使用空白隔开。 </li>
+  <li><strong>点（.）</strong> <i>避免</i> 在前部使用空白。 </li>
+  <li><strong>函数调用和方法</strong> <i>避免</i> 使用空白，例如：<tt> doSomething(someParameter); // 而非 doSomething (someParameter) </tt> </li>
+  <li><strong>逻辑块</strong> 之间使用空行。 </li>
+  <li><strong>声明</strong> <i>建议</i> 对齐使其更容易阅读。 </li></ol><h3><a name="注释"></a>注释<a href="#注释" class="section_anchor">&para;</a></h3><ol>
+  <li>生涩的代码就 <i>没有必要</i> 添加注释了，首先您需要 <strong>重写</strong> 它们。 </li>
+  <li>从已解决的方案到未开发的功能，注释 <i>必须</i> 与代码相关。 </li>
+  <li>大量的变量申明后 <i>必须</i> 跟随一段注释。 </li>
+  <li>注释需要说明的是代码段的用处，尤其是接下来的代码段。 </li>
+  <li>注释 <i>没有必要</i> 每行都添加。 </li>
+ </ol>
+ <p></p>
+
+ <h2>
+  <a name="文档"></a>
+  文档<a href="#文档" class="section_anchor">&para;</a>
+ </h2>
+
+ <h3>
+  <a name="文档注释"></a>
+  文档注释<a href="#文档注释" class="section_anchor">&para;</a>
+ </h3>
+ <ol>
+  <li>用来生成doc的注释，用：/** 注释内容 */ </li>
+  <li>普通的块注释，用：/** 注释内容 */ </li>
+  <li>普通的行尾注释，用：// 注释内容,"//"后面跟一个空格 </li>
+ </ol>
+ <p>下面提供了一个典型的文件，备注包括：描述文件的注释、类或命名空间的注释、方法的注释 </p>
+<pre class="prettyprint">/*
+ * Copyright (c) 2009, Baidu Inc. All rights reserved.
+ * http://www.youa.com
+ * version: $version$ $release$ released
+ * author: JK
+*/
+
+/**
+ * @class StringH 核心对象String的扩展
+ * @singleton
+ * @namespace BB
+ * @helper
+*/
+
+(function(){
+	var StringH = {
+		/** 
+		 * 除去字符串两边的空白字符
+		 * @method trim
+		 * @static
+		 * @param {String} s 需要处理的字符串
+		 * @return {String}  除去两端空白字符后的字符串
+		 * @remark 如果字符串中间有很多连续tab,会有有严重效率问题,相应问题可以用下一句话来解决.
+			return s.replace(/^[\s\xa0\u3000]+/g,"").replace(/([^\u3000\xa0\s])[\u3000\xa0\s]+$/g,"$1");
+		*/
+		trim: function(s) {
+			// ...
+		},
+
+		/** 
+		 * 得到指定字节长度的子字符串
+		 * @method subByte
+		 * @static
+		 * @param {String} s 字符串
+		 * @param {number} len 字节长度
+		 * @param {string} tail (Optional) 结尾字符串
+		 * @return {string}  返回指定字节长度的子字符串
+		*/
+		subByte: function(s, len, tail) {
+			// ...
+		}
+	};
+	BB.provide('StringH', StringH);
+}());</pre>
+
+ <h3>
+  <a name="逻辑块注释"></a>
+  逻辑块注释<a href="#逻辑块注释" class="section_anchor">&para;</a>
+ </h3>
+ <p>为大括号内逻辑块作的注释，应写在大括号内，例如： </p>
+<pre class="prettyprint">if (needDo) {
+	//本段内容是为某物殊情况而作
+	...
+}</pre>
+
+ <h3>
+  <a name="伪代码"></a>
+  伪代码<a href="#伪代码" class="section_anchor">&para;</a>
+ </h3>
+ <p>有时候您需要在函数或者类中添加对于此函数和类的功能性流程描述。如果您打算这样做，您可以使用 <tt> /*===== </tt>（= 字符最好出现 5 次或者更多） 。 </p>
+ <p>这样看起来在 <tt> /*===== </tt> 和 <tt> =====*/ </tt> 会有非常长的一段注释，等待功能调整完毕以后就可以考虑是否删除。 </p>
+<pre class="prettyprint">/*=====
+function trim (s) {
+	return s.replace(/^\s+|\s+$/g, '');
+}
+=====*/
+
+function trim (s) {
+	return s.replace(/^[\s\xa0\u3000]+|[\u3000\xa0\s]+$/g, '');
+}</pre>
+
+ </div>
+
+ <div id="ft">Copyright <a href="http://www.youa.com">http://www.youa.com</a> </div>
+</div>
+</body>
+</html>
+
+

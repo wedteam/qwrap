@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>翻页滚动---Jerry Qu</title>
+	<script type="text/javascript" src="../../../apps/core_dom_youa.js"></script>
+	<script type="text/javascript" src="../../../components/anim/anim.js"></script>
+    <style type="text/css" title="default" media="screen">
+    /*<![CDATA[*/
+
+    /*]]>*/
+    </style>
+    </head>
+	<body>
+		<h3>Scroll动画</h3>
+		<div id="test" style="width:20em;height:6em;overflow:auto;border:1px solid #ccc;">
+			<p>Sed pretium leo a quam. Sed placerat cursus odio. Duis varius mauris luctus enim. Sed augue. Vivamus malesuada pretium orci. In hac habitasse platea dictumst. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent et ante. Praesent convallis. Pellentesque sit amet leo. Ut convallis. Curabitur tincidunt, ipsum facilisis ultricies bibendum, eros dolor venenatis odio, id rutrum purus sem ac sem. Donec vel enim. Quisque purus. Vivamus fringilla, nibh sit amet blandit suscipit, dui arcu viverra magna, id consectetuer dui orci tincidunt neque. Morbi eget libero. Phasellus tempor. Duis dapibus. Pellentesque nisi arcu, mollis in, euismod non, fermentum sit amet, neque.</p>
+		</div><br /><br /><br />
+		<input type="button" value="下翻" id="test1"/>
+		<input type="button" value="回到顶部" id="test2"/>
+		<script type="text/javascript">
+			//anim3
+			var ElAnim = QW.ElAnim,
+				Anim = QW.Anim,
+				Dom = QW.Dom,
+				NodeW = QW.NodeW,
+				g = Dom.g;
+			window.onload = function(){
+				//addEventlistener
+				g("test1").onclick = function(){
+					var anim1 = new ElAnim(g("test"), {
+						"scrollTop" : {
+							by : 80
+						}
+					}, 500);
+
+					anim1.play();
+				};
+				g("test2").onclick = function(){
+					var anim2 = new ElAnim(g("test"), { "scrollTop" : 0 }, 2000, QW.Easing.easeBothStrong);
+
+					anim2.play();
+				};
+			};
+		</script>
+	</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>UnitTest</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="http://dev.qwrap.com/resource/js/_tools/unittest/JSSpec.css" />
+<script type="text/javascript" src="http://dev.qwrap.com/resource/js/_tools/unittest/UnitTest.js"></script>
+<script type="text/javascript" >
+//自己的代码
+//String相关方法：
+function trim(s){
+	return s.replace(/^\s+|\s+$/g,'');
+}
+function camelize(s){
+	return s.replace(/-(\w)/g, function(a,b){return b.toUpperCase();});
+}
+
+//Number相关
+function add50(n){
+	return n+50;
+}
+function mul5(n){
+	return n*5;
+};
+</script>
+
+<script type="text/javascript">// <![CDATA[
+//测试用例代码
+
+describe('String相关', {
+	'trim': function() {
+		value_of(trim("foo")).should_be('foo');
+		value_of(trim("  foo")).should_be('foo');
+		value_of(trim("  foo  ")).should_be('foo');
+	},
+	'camelize': function() {
+		value_of(camelize("abc")).should_be('abc');
+		value_of(camelize("abc-def")).should_be('abcDef');
+		value_of(camelize("abc-def-hij")).should_be('abcDefHij');
+	}
+});
+
+describe('Number相关', {
+	'add50': function() {
+		value_of(add50(1)).should_be(51);
+		value_of(add50(3)).should_be(53);
+		value_of(add50(-5)).should_be(45);
+	},
+	'mul5': function() {
+		value_of(mul5(0)).should_be(0);
+		value_of(mul5(3)).should_be(15);
+		value_of(mul5(-3)).should_be(-15);
+	}
+});
+// ]]></script>
+</head>
+<body>
+</body>
+</html>

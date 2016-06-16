@@ -1,0 +1,20 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>XPC Demo</title>
+	<script type="text/javascript" src="http://qgy18.imququ.com/qwrap_test/apps/core_dom_youa.js"></script>
+	<script type="text/javascript" src="http://qgy18.imququ.com/qwrap_test/components/xpc/xpc.js"></script>
+    </head>
+	<body>
+		<div id="test"></div>
+		<script type="text/javascript">
+			var xpc = new XPC();
+
+			xpc.on('message', function(e) {
+				W('#test').html(e.data);
+				xpc.send('子页面收到了:' + e.data);
+			})
+		</script>
+	</body>
+</html>

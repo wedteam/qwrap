@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>类coda效果---Jerry Qu</title>
+	<script type="text/javascript" src="../../../apps/core_dom_youa.js"></script>
+	<script type="text/javascript" src="../../../components/anim/anim.js"></script>
+    <style type="text/css" title="default" media="screen">
+    /*<![CDATA[*/
+	
+	body {
+		background: #ebebeb url(./img/top-blue-bg.png) repeat-x top left;
+		color: #000; 
+		font-family: "HelveticaNeue-Light", "HelveticaNeue", Helvetica, Arial, sans-serif;
+		font-size: 62.5%;
+	}
+
+	img {
+		border : 0;
+	}
+
+	#frame, #frame div.button, #scroller, .section { height: 57em; }
+
+	#frame {
+		overflow: hidden;
+		margin: 0 auto;
+		width: 838px;
+		position: relative;
+		}
+		
+	#frame div.button {
+		position: absolute;
+		top: 40%;
+		}
+		
+	div.button#left { left: 0; }
+	div.button#right { right: 0; }
+
+	#scroller {
+		width: 750px;
+		margin: 0 auto;
+		border-top: 1px solid #ccc;
+		overflow: hidden;
+		}
+
+	#content {
+		width: 5250px;
+		}
+		
+	.section {
+		width: 710px;
+		margin: 20px;
+		float: left;
+		}
+		
+	.section h2, .section h3 {
+		color: #072453;
+		font-weight: normal;
+		font-family: "HelveticaNeue", Helvetica, Arial, sans-serif;
+		font-size: 19px;
+		line-height: 24px;
+		margin-bottom: 5px;
+		}
+		
+	.section h3 {
+		color: #000;
+		}
+		
+	.section p, .section li {
+		margin: 0 0 20px 0;
+		font-size: 14px;
+		line-height: 22px;
+		}
+
+	.section li strong {
+		font-size: 19px;
+		font-weight: normal;
+		}
+
+	.section img {
+		float: left;
+		margin-right: 20px;
+		margin-bottom: 20px;
+		}
+		
+    /*]]>*/
+    </style>
+    </head>
+	<body>
+		<div id="frame">
+				<div id="left" class="button">
+					<a href="#" id="l"><img onmouseout="this.src = 'img/button-left.gif'" onmouseover="this.src = 'img/button-left-rollover.gif'" alt="left scroll arrow" src="img/button-left.gif"/></a>
+				</div>		
+				<div id="scroller">
+					<div id="content">	
+						<div id="new-pane" class="section">
+							<h2>一、The story of Coda.</h2>
+							<p>So, we code web sites by hand.  And one day, it hit us: <em>our web workflow was wonky</em>.  We’d have our text editor open, with <a href="http://www.panic.com/transmit/">Transmit</a> open to save files to the server. We’d be previewing in Safari, adjusting SQL in a Terminal, using a CSS editor and reading references on the web.  <em>“This could be easier,”</em> we declared.  <em>“And much cooler.”</em></p>
+							<h3>What have we added to Coda lately?</h3>
+							<ul id="new_features">
+								<li id="new-plug_ins" class="new_feature"><strong>Plug-ins.</strong> This is huge! Teach Coda new tricks, and extend its functionality, lickety-split. Download plug-ins that others have written, or write your own plug-ins using your favorite scripting language. This is just the beginning — learn more in the <a href="http://www.panic.com/coda/developer/howto/plugins.php">Coda Developer Zone</a>. We look forward to seeing what you make!</li>
+								<li id="new-open_quickly" class="new_feature"><strong>Open quickly.</strong> Hit <b>Control-Q</b> to instantly access the Open Quickly window. Type a few letters of the local file you want to edit, anywhere in your site. Ka-jang! Instantly open it. It's Spotlight for your website files!</li>
+								<li id="new-spelling" class="new_feature"><strong>Smart Spelling.</strong> Spell check your words — not your code. And in Mac OS X 10.5, do it as you type!</li>
+								<li id="new-svn" class="new_feature"><strong>Subversion.</strong> Work with a team using the most popular source control system there is, baked right into the sidebar. Check out code, update, commit changes — yep, Coda just saved you even more time.</li>
+								<li id="new-find" class="new_feature"><strong>Find across files.</strong> You can now find and replace text across multiple local files — open files, files in a specific folder, or the files in your "site" — using the same sleek, inline search bar you know and love.</li>
+							</ul>
+						</div>
+						<div id="sites-pane" class="section">
+							
+							<h2>二、Double click, start work.</h2>
+							<p>Your Coda experience starts with “Sites”, über-favorites on cute little pieces of paper.  When you’re ready to start work, <strong>just double click a site</strong> — Coda will <strong>instantly restore itself exactly to where you left it</strong>, connecting to your server, restoring any splits and tabs, and allowing you to code, pronto. Plus, sites allow you to easily preview local or remote content, even if it's dynamically generated through a web server.</p>
+							
+							<h3>Plus, one-click publishing.</h3>
+							<p>If you work on websites locally, then publish files remotely to your server, <strong>Coda’s sites will automatically track your local changes and do it all for you</strong>.  Just hit the big, shiny “Publish All” button.  Ka-plam!</p>	<h4 class="hide">Screenshots</h4>
+							<ul class="screenshots">
+								<li><a href=""/></a></li>
+								<li><a href=""/></a></li>
+								<li><a href=""/></a></li>
+							</ul>
+						</div>	
+						<div id="files-pane" class="section">						
+							
+							<h2>三、The power of Transmit, in the space of a sidebar.</h2>
+							<p>What happens when you take the flexibility, power, and compatibility of the <a href="http://www.panic.com/transmit/">Transmit</a> engine, then cram it into a sleek sidebar?  You get a full-featured, built-in file browser, familiar and awesome.  Supporting <strong>FTP</strong>, <strong>SFTP</strong>, <strong>FTP+SSL</strong>, <strong>and WebDAV</strong>, you can connect to virtually any file server imaginable without breaking a sweat.  Edit files remotely, directly.  Copy. Upload.  Rename.  It's all in there.</p>
+							
+							<h3>Smooth source control with Subversion.</h3>
+							<p>Specify the details of a Subversion repository in your Site settings for instant source control. Coda can check out code, allow you to update, commit changes, and more, all from within the easy Coda sidebar. Better still, a new “Source Control” floating window shows you all of your source status at a glance. Dedicated Mac SVN clients cost up to $60 — Coda 1.5 adds Subversion for free.</p>			
+							<h4 class="hide">Screenshots</h4>
+							<ul class="screenshots">
+								<li><a rel="zoom:" href=""/></a></li>
+								<li><a rel="zoom:" href=""/></a></li>
+								<li><a rel="zoom:" href=""/></a></li>
+							</ul>
+						</div>
+						<div id="editor-pane" class="section">
+							<h2>四、Elegant and powerful text editing.</h2>
+							<p>We’ve put together one of the most graceful and feature-packed text editors on the Mac, specifically for maximum hand-coding hotness.  It’s got what you expect: <strong>syntax coloring, line numbering, auto completing, block editing, international support, etc.</strong>  But the stuff we’ve built on top will really flip your editing lid.  To wit:</p>
+							<ul id="editor-features">
+								<li id="editor-collab"><strong>Live Collaboration.</strong> Using the innovative <a target="_new" href="http://www.codingmonkeys.de/subethaengine/">Subetha Engine</a>, edit code live and simultaneously with a co-worker in the next cube — or across the globe. Share documents via Bonjour, and track changes.</li>
+								<li id="editor-clips"> <strong>Clips.</strong> A friendly floating window allows you to insert your frequently used text snippets just by clicking, dragging, or tab-triggering.  Nice!</li>
+								<li id="editor-token"><strong>Revolutionary Find/Replace.</strong> Sure, we've got regular ol' Grep. But we also provide a Grep wrapped with drag and drop simplicity — a Coda first. Want to swap the width and height tags?  It’s as simple as searching for <em class="token">width=“”</em>.  That’s it: Coda does the rest.</li>
+							</ul>
+							<h4 class="hide">Screenshots</h4>
+							<ul class="screenshots">
+								<li><a rel="zoom:" href=""/></a></li>
+								<li><a rel="zoom:" href=""/></a></li>
+								<li><a rel="zoom:" href=""/></a></li>
+							</ul>
+						</div>
+						<div id="preview-pane" class="section">
+							<h2>五、Preview for reals.</h2>
+							<p>You’re writing code; you want to see what it looks like.  Thanks to <strong>Apple’s WebKit</strong>, we’ll show your site exactly as it looks like in Safari, even as you type.  Working on a file on a remote server?  We’ll update the preview automatically the moment you hit “Save”.  The hardest part?  Breaking your old habits!</p>
+							
+							<h3>Visualize your layout.</h3>
+							<p>Turn on Coda’s “DOM Inspector” to get a <strong>visual look at your site’s element hierarchy</strong>.  Hover over an element to see how it fits in the page as a whole.  The DOM trail in the bottom bar offers an instant glance at how your page fits together.</p>
+							<h3>Javascript console, too.</h3>
+							<p>If your Javascript occasionally has a bug or two or 162, Coda’s Preview can help you out with its built-in Javascript console, showing you relevant errors and line numbers.  It even supports console.log(), the best debugging thing created since ever.</p>
+							<h4 class="hide">Screenshots</h4>
+							<ul class="screenshots">
+								<li><a rel="zoom:" href=""/></a></li>
+							</ul>
+						</div>
+						<div id="css-pane" class="section">
+							<h2>六、Create beautiful CSS.</h2>
+							<p>Using a separate program to design your stylesheets?  That’s crazy stuff!  We’ve built a fully-featured CSS editor directly into Coda, giving you all the tools you need to create the world’s most beautiful layout.  It’s like getting a second, full-featured application thrown in for free!</p>
+							
+							<h3>Visual? Text? Edit your way.</h3>
+							<p>Coda gives you a choice of <em>two editing modes</em> when working on your CSS.  In visual mode, you’ll get convenient GUI controls that let you edit your style sheets with point and click simplicity.  With text mode, your CSS styles are organized and you can edit the details, directly.</p>
+							
+							<h3>Easier than ever.</h3>
+							<p>Organized cleanly, your CSS styles become a series of easy-to-understand groups instead of a scramble of hard-to-parse text.  And yes, you can edit CSS and source code at the same time to instantly see your changes — just make a vertical split!</p>
+							<h4 class="hide">Screenshots</h4>
+							<ul class="screenshots">
+								<li><a rel="zoom:" href=""/></a></li>
+								<li><a rel="zoom:" href=""/></a></li>
+							</ul>
+						</div>
+						<div id="more-pane" class="section">
+							<h2>七、And yes, much much more.</h2>
+							<p>It's hard to overstate how many little bonuses Coda holds. Here are a few more things we think you'll love.</p>
+							
+							<h3>Terminal: built right in</h3>
+							<p>OK, it's not very sexy. In fact, it's quite the opposite.  But Coda is all about the little things that make your web development a squidgeon easier. If you need to SSH into a server and run some MySQL queries, or restart Apache, or debug PHP, you need a Terminal. We've got one.</p>
+							
+							<h3>Books: we give you some, you add your own.</h3>
+							<p>We've built in the <strong>The Web Programmer's Desk Reference</strong>, a $60 value, from No Starch Press. We made it searchable, even tying the reference into the editor itself, so you can jump from code to documentation when you need to.  And now in Coda 1.5, you can add your own web books, accessible at any time.  Just point Coda to your favorite reference website.  Even add a cover!</p>
+							<h4 class="hide">Screenshots</h4>
+							<ul class="screenshots">
+								<li><a rel="zoom:" href=""/></a></li>
+								<li><a rel="zoom:" href=""/></a></li>
+								<li><a rel="zoom:" href=""/></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="right" class="button">
+					<a href="#" id="r"><img onmouseout="this.src = 'img/button-right.gif'" onmouseover="this.src = 'img/button-right-rollover.gif'" alt="right scroll arrow" src="img/button-right.gif"/></a>
+				</div>
+			</div>
+		<script type="text/javascript">
+		//<![CDATA[
+			var Scroll = QW.ScrollAnim,
+				Dom = QW.Dom,
+				NodeW = QW.NodeW,
+				g = Dom.g;
+			window.onload = function(){
+				var isRun = false;
+				g("l").onclick = function(){
+					if(isRun) return;
+					isRun = true;
+
+					var dis = g("scroller").scrollLeft < 10 ? 5400 : -750;
+
+					var anim1 = new Scroll(g("scroller"), {
+						"scrollLeft" : {
+							by : dis
+						}
+					}, 500, function(p){
+						return -1/2 * (Math.cos(Math.PI*p) - 1);
+					});
+
+					anim1.onend = function(){
+						isRun = false;
+					}
+
+					anim1.play();
+					return false;
+				};
+				g("r").onclick = function(){
+					if(isRun) return;
+					isRun = true;
+
+					var dis = g("scroller").scrollLeft > 4490 ? -5400 : 750;
+
+					var anim2 = new Scroll(g("scroller"), {
+						"scrollLeft" : {
+							by : dis
+						}
+					}, 500, function(p){
+						return -1/2 * (Math.cos(Math.PI*p) - 1);
+					});
+
+					anim2.onend = function(){
+						isRun = false;
+					}
+
+					anim2.play();
+					return false;
+				};
+			};
+		//]]>
+		</script>
+	</body>
+</html>

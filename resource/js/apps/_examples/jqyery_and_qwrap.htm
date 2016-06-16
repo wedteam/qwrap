@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>QW应用之一：jquery + qw_core_retouched</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="http://common.cnblogs.com/script/jquery.js"></script>  
+<script type="text/javascript" src="../../apps/core_retouched.js"></script>
+<script type="text/javascript">
+function test(el){
+	$(el).val( $(el).val().dbc2sbc() );
+}
+</script>
+</head>
+<body>
+<div>
+由于jquery专注于dom，所以不会额外的提供模块use机制、js原生对象原型扩展等。<br/>
+而这一部分，恰好是QWrap的apps/core_retouched.js应用所提供的。<br/>
+所以，用jquery + qw_core_retouched组成一个新的应用，这应用就集成了jquery框架的dom便利、prototype框架的prototype便利、也有qwrap的ModuleH等相关功能于一体的一个组合库了。<br/><br/>
+用法如：$(el).val( $(el).val().dbc2sbc() );
+</div>
+<input type=text value="点击－－全角转半角１２３" onclick="test(this)" style="width:200px;"/>
+
+</body>

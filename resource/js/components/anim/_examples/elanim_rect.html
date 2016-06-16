@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>元素位置、大小动画---Jerry Qu</title>
+	<script type="text/javascript" src="../../../apps/core_dom_youa.js"></script>
+	<script type="text/javascript" src="../../../components/anim/anim.js"></script>
+    <style type="text/css" title="default" media="screen">
+    /*<![CDATA[*/
+
+    /*]]>*/
+    </style>
+    </head>
+	<body style="height:2000px;">
+		<h3>点击方块</h3>
+		<div id="monkey" style="cursor:pointer;position:absolute;top:-300px;left:-500px;width:157px;height:130px;background:url(img/monkey.gif)"></div>
+		<div id="test1" style="cursor:pointer;position:absolute;top:50px;left:20px;width:100px;height:100px;background:#6B90DA;border:#333"></div>
+		<div id="test2" style="cursor:pointer;position:absolute;top:160px;left:20px;width:100px;height:100px;background:#6B90DA;border:#333"></div>
+		<div id="test3" style="cursor:pointer;position:absolute;top:270px;left:20px;width:100px;height:100px;background:#6B90DA;border:#333"></div>
+		<div id="test4" style="cursor:pointer;position:absolute;top:380px;left:20px;width:100px;height:100px;background:#6B90DA;border:#333"></div>
+		<script type="text/javascript">
+			//anim1
+			var ElAnim = QW.ElAnim,
+				Dom = QW.Dom;
+								
+			var anim1;
+
+			//anim2
+			var anim2 = new ElAnim("test2", {
+				"opacity" : {
+					from : 1,
+					to   : 0
+				}
+			}, 500);
+
+			//anim3
+			var anim3 = new ElAnim("test3", {
+				"width" : {
+					to : 0,
+					easing : QW.Easing.easeOut
+				},
+				"height" : {
+					to : 0,
+					easing : QW.Easing.easeOutStrong
+				}
+			}, 3000);
+
+			//anim4
+			var pos = Dom.getDocRect();
+			var anim4 = new ElAnim("test4", {
+				"opacity" : {
+					to : 0.5
+				},
+				"top" : {
+					to : pos.height/2 -150
+				},
+				"left" : {
+					to : pos.width/2 - 250
+				},
+				"width" : {
+					to : 500
+				},
+				"height" : {
+					to : 300
+				}
+			}, 3000, QW.Easing.easeBothStrong);
+
+			//addEventlistener
+			W.g("test1").on("click",function(){
+				if(anim1 && anim1.isPlaying) {
+					anim1.pause();
+				}
+	 			anim1 = new ElAnim("test1", {
+					"width" : {
+						to : 500,
+						end : 100
+					},
+					'background-color' : {
+						from : '#0f0',
+						to : '#f00',
+						end : '#6B90DA'
+					}
+				}, 3000, QW.Easing.easeBoth);
+				anim1.play();
+			});
+
+			W.g("test2").on("click",function(){
+				anim2.play();
+				setTimeout(function(){
+					anim2.reset();
+				}, 1500);
+			});
+
+			W.g("test3").on("click",function(){
+				anim3.play();
+				
+				setTimeout(function(){
+					anim3.reset();
+				}, 3500);
+			});
+
+			W.g("test4").on("click",function(){
+				anim4.play();
+				
+				setTimeout(function(){
+					anim4.reset();
+				}, 5000);
+			});
+			
+			W.g(document.body).on("dblclick",function(e){
+				var pos = {x:e.pageX,y:e.pageY};
+				var anim = new ElAnim(g("monkey"),{
+					"left" : {
+						to : pos.x
+					},
+					"top" : {
+						to : pos.y
+					},
+					"opacity" : {
+						to : 1
+					}
+				}, 2000, QW.Easing.elasticOut);
+				
+				anim.play();
+			});
+
+			W.g("monkey").on("click",function(){
+				new ElAnim(g("monkey"),{
+					"opacity" : {
+						from : 1,
+						to : 0
+					}
+				}, 500).play();
+			});
+		</script>
+	</body>
+</html>

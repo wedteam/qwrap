@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>UnitTest</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../JSSpec.css" />
+<script type="text/javascript" src="../UnitTest.js"></script>
+<script type="text/javascript">// <![CDATA[
+describe('log/should', {
+	'log/should': function() {
+		value_of("foo").log();
+		value_of("foo").should_be("foo").line;
+		value_of(value_of('foo')).log('What does value_of return:');
+	}
+})
+
+describe('JKtest1', {
+
+	'hello1': function() {
+		value_of("hello").should_be("hello").line;
+	},
+	'hello2': function() {
+		value_of("hello").should_be("good-bye").line;
+	},
+	'hello3': function() {
+		value_of(null).property_should_be("value","1").line;
+	}
+});
+
+describe('JKtest2', {
+
+	'hello1': function() {
+		value_of("hello").should_be("hello").line;
+	},
+	'hello2': function() {
+		value_of("hello").should_be("good-bye").line;
+	},
+	'hello3': function() {
+		value_of("hello").property_should_be("length",5).line;
+	},
+	'hello4': function() {
+		value_of(null).property_should_be("value","1").line;
+	}
+});
+
+// ]]></script>
+</head>
+<body>
+</body>
+</html>

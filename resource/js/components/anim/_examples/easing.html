@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>动画算子演示---Jerry Qu</title>
+    <style type="text/css" title="default" media="screen">
+		body{font-size:13px}
+		dt{font-weight:bold;padding:3px}
+		dd{background:#F0F7F9;margin:0}
+		.container{height:30px;position:relative}
+		.move{background:#6B90DA;height:30px;width:30px;position:absolute;left:100px}
+    </style>
+	<script type="text/javascript" src="../../../apps/core_dom_youa.js"></script>
+	<script type="text/javascript" src="../../../components/anim/anim.js"></script>
+	<script type="text/javascript">
+		var ElAnim = QW.ElAnim,
+			Dom = QW.Dom,
+			NodeW = QW.NodeW;
+		window.onload = function(){
+			var easings = [		//算子列表
+				QW.Easing.easeNone,
+				QW.Easing.easeIn,
+				QW.Easing.easeOut,
+				QW.Easing.easeBoth,
+				QW.Easing.easeInStrong,
+				QW.Easing.easeOutStrong,
+				QW.Easing.easeBothStrong,
+				QW.Easing.elasticIn,
+				QW.Easing.elasticOut,
+				QW.Easing.elasticBoth,
+				QW.Easing.backIn,
+				QW.Easing.backOut,
+				QW.Easing.backBoth,
+				QW.Easing.bounceIn,
+				QW.Easing.bounceOut,
+				QW.Easing.bounceBoth
+			];
+
+			Dom.query(".move").forEach(function(el, i) {
+				W.g(el).on("click",function(e){
+					var anim = new ElAnim(this,{
+						left : {
+							by : 500
+						}
+					}, 2000, easings[i]);
+					anim.onend = function(){
+						setTimeout(function(){
+							el.style.left = "100px";		//动画结束后500ms复原
+						}, 500);
+					};
+					anim.play();
+				});
+			});
+
+			NodeW.query(0, 'input[type="button"]').on("click",function(e) {
+				QW.EventH.preventDefault();
+				NodeW.query(0, ".move").fire("click");
+			});
+
+		};
+	</script>
+    </head>
+	<body>
+		<h2>动画类算子</h2>
+		<p>点击蓝色方块开始播放，或者<input type="button" value="全部播放"></p>
+		<dl>
+			<dt>1.QW.Easing.easeNone（匀速）</dt>
+			<dd><div class="container"><div class="move"></div></div></dd>
+			<dt>2.QW.Easing.easeIn（加速）</dt>
+			<dd><div class="container"><div class="move"></div></div></dd>
+			<dt>3.QW.Easing.easeOut（减速）</dt>
+			<dd><div class="container"><div class="move"></div></div></dd>
+			<dt>4.QW.Easing.easeBoth（加速开始减速结束）</dt>
+			<dd><div class="container"><div class="move"></div></div></dd>
+			<dt>5.QW.Easing.easeInStrong（加速·强化）</dt>
+			<dd><div class="container"><div class="move"></div></div></dd>
+			<dt>6.QW.Easing.easeOutStrong（减速·强化）</dt>
+			<dd><div class="container"><div class="move"></div></div></dd>
+			<dt>7.QW.Easing.easeBothStrong（加速开始减速结束·强化）</dt>
+			<dd><div class="container"><div class="move"></div></div></dd>
+			<dt>8.QW.Easing.elasticIn（弹性开始）</dt>
+			<dd><div class="container"><div class="move"></div></div></dd>
+			<dt>9.QW.Easing.elasticOut（弹性结束）</dt>
+			<dd><div class="container"><div class="move"></div></div></dd>
+			<dt>10.QW.Easing.elasticBoth（弹性开始弹性结束）</dt>
+			<dd><div class="container"><div class="move"></div></div></dd>			
+			<dt>11.QW.Easing.backIn（退后开始）</dt>
+			<dd><div class="container"><div class="move"></div></div></dd>
+			<dt>12.QW.Easing.backOut（越界结束）</dt>
+			<dd><div class="container"><div class="move"></div></div></dd>
+			<dt>13.QW.Easing.backBoth（退后开始越界结束）</dt>
+			<dd><div class="container"><div class="move"></div></div></dd>
+			<dt>14.QW.Easing.bounceIn（跳动开始）</dt>
+			<dd><div class="container"><div class="move"></div></div></dd>
+			<dt>15.QW.Easing.bounceOut（跳动结束）</dt>
+			<dd><div class="container"><div class="move"></div></div></dd>
+			<dt>16.QW.Easing.bounceBoth（跳动开始跳动结束）</dt>
+			<dd><div class="container"><div class="move"></div></div></dd>
+		</dl>
+		<p>点击蓝色方块开始播放，或者<input type="button" value="全部播放"></p>
+	</body>
+</html>

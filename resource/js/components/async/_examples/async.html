@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title> new document </title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="generator" content="editplus" />
+  <meta name="author" content="" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <script src="../../../apps/qwrap.js"></script>
+  <script type="text/javascript" srccc="../async.js" remark="qwrap.js已默认包含本async.js"></script>
+ </head>
+
+ <body>
+ 	<a name="basic"></a>
+ 	<h3>基本用法</h3>
+ 	<div><button id="test0">每次点击延迟0.5秒计数，多次点击依次顺延</button></div>
+ 	<div>连击数: <span id="click_time">0</span></div>
+ 	<hr/>
+ 	<a name="anim"></a>
+ 	<h3>Async与动画</h3>
+ 	<div><button id="start_async">点击开始动画</button>(W("#test").fadeOut(1000,true).fadeIn(1000,true).slideUp(1000, function(){W('#resume_async').attr('disabled', '')} ,true).wait().slideDown(1000,true);)</div>
+	<div id="test">test</div>
+	<div><button id="resume_async" disabled="disabled">test的动画停止了的话，点击这个可以继续</button></div>
+	<hr/>
+	<a name="task"></a>
+	<h3>Async任务与取消任务</h3>
+	<button id="test2"><span>5</span>秒后改变文字颜色(点击可取消) </button>
+ </body>
+ <script>
+ 	W("#test0").on("click", function(){
+ 		var me = this;
+ 		W(me).wait('_add', function(){
+ 			var time = parseInt(W("#click_time").html()) + 1;
+ 			W("#click_time").html(time);
+ 			setTimeout(function(){W(me).signal('_add')}, 500);
+ 		});
+ 	});
+
+ 	W("#start_async").on("click", function(){
+	 	//QW.ElAnim.Sequence = true;
+		W("#test").fadeOut(1000,true).sleep(1500).fadeIn(1000,true).slideUp(1000, function(){W('#resume_async').attr('disabled', '')} ,true).wait().slideDown(1000,true);
+		//QW.ElAnim.Sequence = false;
+		W(this).attr('disabled', 'disabled');
+ 	});
+
+	W("#resume_async").on("click", function(){
+		W("#test").signal();
+		W(this).attr('disabled', 'disabled');
+	});
+
+	W("#test2").on('click', function(){
+		W(this).clearSignals("foobar");
+		W(this).html('任务取消').attr('disabled', 'disabled');
+	});
+
+	W("#test2").wait("foobar",function(){
+		W(this).css('color','red');
+		W(this).html('文字已变成红色').attr('disabled', 'disabled');
+	});
+
+	setTimeout(function(){
+		W("#test2").signal("foobar");
+	}, 5000);
+ </script>
+</html>

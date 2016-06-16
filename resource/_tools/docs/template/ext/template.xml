@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <classTemplate tpl="tpl/class.xsl" targetDir="output"/>
+    <treeTemplate tpl="tpl/tree.xsl" targetFile="output/tree.js"/>
+    <source targetDir="source" wrapper="source-wrap.html"/>
+    <resources>
+        <copy src="index.php" dst="index.php"/>
+	<copy src="config.json" dst="config.json"/>
+        <copy src="welcome.html" dst="welcome.html"/>
+	<copy src="update_svn.php" dst="update_svn.php"/>
+        <copy src="resources" dst="resources"/>
+    </resources>
+</template>

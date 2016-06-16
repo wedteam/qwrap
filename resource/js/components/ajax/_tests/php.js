@@ -1,0 +1,1 @@
+window.AjaxPhpJsData='PhpJsData';

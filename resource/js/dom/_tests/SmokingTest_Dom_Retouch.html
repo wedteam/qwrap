@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>QW: SmokingTest</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../../apps/assets/base.css" rel="stylesheet" type="text/css" media="screen"/>
+<script type="text/javascript" src="../../core/core.js"></script>
+
+<script type="text/javascript" src="../../dom/dom.js"></script>
+<script>
+//var d0=new Date();
+</script>
+<script type="text/javascript" src="../../dom/event.w.js"></script>
+<script type="text/javascript" src="../../dom/node.c.js"></script>
+<script type="text/javascript" src="../dom_retouch.js"></script>
+<script>
+//alert("Retouch花去的时间："+(new Date()-d0));
+</script>
+
+
+<script type="text/javascript" src="../../_tools/smokingtest/SmokingTest.js"></script>
+<link href="../../_tools/smokingtest/assets/page.css" rel="stylesheet" type="text/css" media="screen"/>
+</head>
+
+<body>
+<div id=doc3>
+	<h1 class="page-h1">QW Core.js 冒烟测试</h1>
+	<div id=hd>
+		<!-- keep it -->
+	</div>
+	<div id="bd" >
+		<div class="section-ctn" id="ST_ctn">
+		</div>
+	</div>
+	<div>
+		<hr/>
+本示例是Retouch后的效果。<br/>
+如想看无污染，只支持静态方法的，请到<a href="SmokingTest_Core.html">SmokingTest_Dom.html</a>
+<hr/>
+<pre>
+一些常用例子：
+
+QW.NodeW("textarea").setStyle("color","blue").setStyle("width","600px"); //NodeW的链式调用示例
+
+</pre>
+</pre>
+	</div>
+	<div id="ft">
+		QW 
+	</div>
+</div>
+
+<script>
+SmokingTest.init(document.getElementById('ST_ctn'),['QW']);
+</script>
+</body>
+</html>

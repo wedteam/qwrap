@@ -1,0 +1,95 @@
+/*
+Copyright: QW.
+version: 0.0.1
+remark: most code is copy from baidu c2c
+*/
+
+/*reset*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,textarea,select,optgroup,option,fieldset,legend,p,blockquote,th,td {margin:0;padding:0;}
+fieldset,img {border: 0;}
+address,caption,cite,code,dfn,var,optgroup {font-style: normal;font-weight: normal;}
+ins {text-decoration: none;}
+li {list-style: none;}
+table {font-size:inherit;font:100%;}
+caption,th {text-align: left;}
+h1,h2,h3,h4,h5,h6 {font-size: 100%;}
+q:before,q:after {content:'';}
+abbr,acronym {border: 0;font-variant: normal;}
+legend {color: #000;}
+input,button,textarea,select,optgroup,option {font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;}
+input,button,textarea,select {	margin:0;*font-size: 100%;	line-height:1.2;}
+a img,img {-ms-interpolation-mode:bicubic;}
+
+/*
+layout
+#doc1 - 100% fluid width also sets 10px of left and right margin 
+#doc2 - 760px
+#doc3 - 950px
+*/
+#doc1,#doc2,#doc3 { margin:auto;text-align:left;min-width:760px;zoom:1;font-size:100%;}
+#doc1 {margin:auto 10px;}
+#doc2 {width:760px;}
+#doc3 {width:950px;}
+
+h1.page-h1 {font-weight:bold;color:#555;background-color:#def;border:1px solid #cdf;line-height:2.0;font-size:105%;}
+#hd,#bd,#ft{}
+#ft{text-align:center;margin-top:26px;border-top:1px solid #cde;}
+
+
+/* body */
+body {font:12px/1.5 arial,helvetica,sans-serif;	color: #333;}
+/* link */
+a {	color:#0066ff;text-decoration:none;}
+a:hover,a:active,a:focus {color:#2244dd;	text-decoration:underline;}
+/* form validator */
+textarea.error{	background-color:#f88;}
+input.error{background-color:#f88;}
+em.error{color:#ff4a32!important;}
+span.emptyhint {color:#999;position:absolute;padding:3px;}
+span.dark-emptyhint {display:none}
+
+/* side */
+#slideTab{background:#06c;overflow:hidden;padding:7px 0 0px 25px;color:#fff;}
+#slideTab a{display:inline-block;height:22px;padding:0 10px;color:#fff;margin-bottom:-1px;font-size:14px;}
+#slideTab a.on{background:#fff;-moz-box-shadow:1px -1px 2px #999999;background:-moz-linear-gradient(center top , #DDDDDD, white 50%) repeat scroll 0 0 transparent;border-color:#EEEEEE #EEEEEE -moz-use-text-color;border-style:solid solid none;border-width:1px 1px 0;color:#333333;position:relative;}
+
+#keyList {border:solid 1px #ccc;height:400px;margin:2em 0 0 1em;overflow-y:auto;overflow-x:hidden;width:232px;}
+#keyList a {color:#333;display:block;font-family:"宋体";font-size:0.88em;line-height:14px;text-indent:0.2em;white-space:nowrap;}
+#keyList a:hover{background:#34538b;color:#fff;text-decoration:none;}
+
+#index p{padding:1em 0 0.3em 10px;}
+#searchInput {margin-left:10px;width:220px;}
+
+/* tree jk */
+.tree-wrap {text-align:left;}
+.tree-wrap .highlight {background-color:#CCFFEE;color:black;font-weight:bold;}
+.tree-wrap ul {margin-left:6px; padding-left:12px; border-leftJKJK:#cccccc solid 1px;}
+.tree-wrap .node-ctn {display:inline}
+.folder-img-open {background:url("../images/a.png") no-repeat -2px 1px; width:18px; display:-moz-inline-box;display:inline-block;cursor:pointer;}
+.folder-img-closed {background:url("../images/a.png") no-repeat -2px -79px;; width:18px; display:-moz-inline-box;display:inline-block;cursor:pointer;}
+.tree-lever1 {font-weight:bold;}
+
+/* content  */
+#hd{height:30px;line-height:30px;background:#06c;color:#fff;clear:both;padding-left:10px;}
+#hd strong{font-size:14px;}
+#bd{padding:15px 10px;min-height:450px;}
+#nav{height:30px;padding-left:10px;line-height:30px;background:#f3f3f3;color:#333;}
+#bd .item{margin-bottom:15px;}
+#bd h2{color:#1747b5;font-size:14px;line-height:30px;font-weight:bold;}
+#bd h3{color:#1747b5;font-size:14px;line-height:30px;}
+#bd h4{margin-bottom:6px;}
+#bd table ,
+#bd table th,
+#bd table td{border-collapse:collapse;border:1px solid #83acff;padding:3px 10px;vertical-align: top;}
+#bd table th{background:#e5ecf9;}
+#bd pre{border:1px dashed #83acff;margin:6px 0;padding:6px;}
+
+.syntax_param,.syntax_ret {margin:10px 5px;}
+.syntax_detail {margin-left:15px;}
+
+textarea.code {width:100%;height:114px;display:block;padding:3px;font-family: Courier New;font-size:12px;}
+div.code_highlight {width:100%;height:120px;background-color:#eee; border:solid #ccc 1px;overflow:auto;}
+.example_wrap {margin-bottom:5px;}
+
+
+

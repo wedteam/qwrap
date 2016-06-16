@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>EventH demo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="../../core/core.js"></script>
+<script type="text/javascript" src="../../dom/dom.js"></script>
+<script type="text/javascript" src="../../dom/node.c.js"></script>
+<script type="text/javascript" src="../../dom/dom_retouch.js"></script>
+</head>
+<body>
+	<div style="visibility:hidden;width:10px;height:1000px;position:absolute;">&nbsp;</div>
+	<h2>1. target, ctrlKey, altKey, shiftKey, keyCode</h2>
+	<input id="keyboard">
+	<br />
+	ctrlKey altKey shiftKey keyCode
+	<div style="height:50px;overflow:auto;border:1px solid #000;"></div>
+	<script type="text/javascript">//<![CDATA[
+		QW.NodeW.g('keyboard').on('keydown', function (e) {
+			var next = QW.Dom.nextSibling(e.target, 'div');
+			next.innerHTML += e.ctrlKey
+				+ '&nbsp;&nbsp;&nbsp;'
+				+ e.altKey
+				+ '&nbsp;&nbsp;&nbsp;'
+				+ e.shiftKey
+				+ '&nbsp;&nbsp;&nbsp;'
+				+ e.keyCode
+				+ '<br />';
+			next.scrollTop = next.scrollHeight;
+		});
+	//]]></script>
+
+	<hr />
+	<h2>2. layerX, layerY, pageX, pageY</h2>
+	<script type="text/javascript">//<![CDATA[
+		var simpleDrag = function (target) {
+
+			var doc = target.document || target.ownerDocument || (target.window || target.defaultView) && target || document;
+
+			var e = QW.EventH.standardize(null, target);
+
+			var twrap = QW.NodeW.g(target);
+
+			var xy = twrap.getXY();
+			var x = e.pageX - xy[0], y = e.pageY - xy[1];
+
+			var move = function (e) {
+				twrap.setXY(e.pageX - x, e.pageY - y);
+			};
+			
+			var up = function () {
+				QW.NodeW.un(doc, 'mousemove', move).un('mouseup', up);
+			};
+
+			move(e);
+
+			QW.NodeW.on(doc, 'mousemove', move).on('mouseup', up);
+		};
+
+		document.write('<iframe id="f" marginheight="0" marginwidth="0"></iframe>');
+		var d = QW.NodeH.g('f').contentWindow.document;
+		d.open();
+		d.write('<div style="position:absolute;background:#CCC;width:50px;height:50px;border:none;margin:none;padding:none;" onmousedown="top.simpleDrag(this)">&nbsp;</div>');
+		d.close();
+	//]]></script>
+	<br />
+	<div style="top:290px;left:400px;position:absolute;background:#000;width:50px;height:50px;border:none;margin:none;padding:none;" onmousedown="simpleDrag(this)">&nbsp;</div>
+
+	<hr />
+	<h2>3. hover</h2>
+	<div id="test" style="width:200px;height:200px;background:red;position:relative">
+		<div style="top:50px;left:50px;width:100px;height:100px;background:blue;">
+		</div>
+	</div>
+	<script type="text/javascript">
+		QW.NodeW('#test').hover(function() {
+			QW.NodeW(this).css('backgroundColor', ["#000", "#0f0", "#00f", "#ff0", "#0ff", "#f0f"][parseInt(Math.random() * 6)]);
+		}, function() {
+			QW.NodeW(this).css('backgroundColor', 'red');
+		});
+	</script>
+
+	<hr />
+	<h2>4. detail preventDefault</h2>
+	<img id="logo" src="http://co.youa.baidu.com/picture/r/mall/css/090518/lg_pt1.gif" alt="detail" />
+	<script type="text/javascript">//<![CDATA[
+	QW.NodeW.g('logo').on('mousewheel', function () {
+		var w = null
+			, rect = null
+			, n = 0
+			, step = .2;
+		return function (e) {
+			if (!w) {
+				w = QW.NodeW.g(this);
+				rect = w.getRect();
+			}
+			n += e.detail > 0 ? 1 : -1;
+			var nw = Math.round(rect.width + rect.width * n * step)
+				, nh = Math.round(rect.height + rect.height * n * step);
+			w.setInnerSize(nw + 'px', nh + 'px');
+			e.preventDefault();
+		};
+	}());
+	//]]></script>
+
+	<hr />
+	<h2>5. stopPropagation</h2>
+	<div onmousedown="alert(2);" style="background-color:#000;width:200px; height:50px;">
+		<div onmousedown="alert(1);QW.EventH.stopPropagation();" style="background-color:#CCC;width:100px; height:30px;">&nbsp;</div>
+	</div>
+
+	<hr />
+	<h2>6. delegate change</h2>
+	<div id="test_delegate">
+		<select size="3">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</select>
+		<input type="checkbox" />
+		<span></span>
+	</div>
+	<script type="text/javascript">
+		QW.NodeW('#test_delegate').delegate('select,input', 'change', function(e) {
+			QW.NodeW('#test_delegate span').html(this.value);
+		});
+	</script>
+
+</body>
+</html>

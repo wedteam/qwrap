@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>QWrap</title>
+<link type="text/css" media="screen" rel="stylesheet" href="../../css/css.css">
+<script type="text/javascript" src="../../js/apps/qwrap.js"></script>
+<script type="text/javascript" src="../../js/qwrapdoc/codehighlight_and_page.js"></script>
+</head>
+<body>
+<div id=doc1>
+	<!-- hd start -->
+	<div id="hd">
+		<strong>Qwrap 常用查询手册</strong>
+	</div>
+	<!-- hd end -->
+	<!-- nav start -->
+	<div id="nav">
+		<a href="index.htm" target="contents">节点Event事件</a>
+		&nbsp;>&nbsp;
+		stopPropagation 阻止事件冒泡
+	</div>
+	<!-- nav end -->
+	<!-- bd start -->
+	<div id="bd">
+		<div class="item">
+			<div class="syntax_title">
+				<h3>语法： </h3>
+				<p>e.stopPropagation()</p>
+			</dt>
+			<div class="syntax_detail">
+				<div class="syntax_param">
+					<h4>参数：</h3>
+					<table cellspacing="0" cellpadding="0" rules="cols">
+						<tr><th></th><th>类型</th><th>描述</th></tr>
+					</table>
+				</div>
+				<div class="syntax_ret">
+					<h4>返回值：</h3>
+					<p>无</p>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item">
+			<h3>用法示例：</h3>
+			<ul>
+				<li class="example_wrap">
+					<h4>示例1： </h4>
+<textarea class="code code_html"><head><script type="text/javascript" src="../../js/apps/qwrap.js"></script></head>
+<body>
+	<div style="border:solid black 1px;padding:5px;" id='ctn_outer'>点我
+		<div style="border:solid black 1px;padding:5px;" id='ctn_inner'>我不想惊动上层
+		</div>
+	</div>
+	
+	<script type="text/javascript" defer>
+	W('#ctn_outer').on('click',function(e){
+		alert(this.innerHTML);
+	});
+	W('#ctn_inner').on('click',function(e){
+		e.stopPropagation();
+	});
+	</script>
+</body>
+</textarea>
+				</li>
+			</ul>
+
+		</div>
+
+		<div class="item">
+			<h3>备注：</h3>
+			<p>本方法是由<a href="#" class="method_source">QW.EventH.stopPropagation</a>经“methodize”变换得到</p>
+		</div>
+	</div>
+	<!-- bd end -->
+	<div id="ft">
+		<a href="http://www.qwrap.com" target="_blank">www.QWrap.com</a>  &copy;2011 
+	</div>
+</div>
+</body>
+</html>

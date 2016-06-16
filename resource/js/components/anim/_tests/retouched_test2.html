@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>TEST</title>
+	<script type="text/javascript" src="../../../apps_qiwu/qwrap_qiwu.js"></script>
+	<script type="text/javascript" src="../../../components/anim/anim.js"></script>
+
+    </head>
+	<body>
+		<div id="test" style="width:250px;height:250px;background:red;overflow:hidden;"></div>
+		<div style="padding-top:20px;">
+			<button type="button" >fadeOut(1000, true).fadeIn(1000, true).animate({'background-color':'#0f0'}, 1000, true).animate({'background-color':'#f00'}, 1000, true)</button><br ><br >
+			<input type="button" value="stop()" />
+			<input type="button" value="stop(false, true)" />
+			<input type="button" value="stop(true)" />
+			<input type="button" value="stop(true, true)" /><br ><br >
+			<input type="button" value="slideUp(1000)" />
+			<input type="button" value="fadeIn(1000)" />
+			<input type="button" value="fadeOut(1000)" />
+			<input type="button" value="slideDown(1000)" />
+		</div>
+		<script>
+			W('input').click(function() {
+				eval("W('#test')." +W(this).val());
+			});
+
+			W('button').click(function() {
+				eval("W('#test')." +W(this).html());
+			});
+
+			W('#test').css('opacity', .5);
+		</script>
+	</body>
+</html>

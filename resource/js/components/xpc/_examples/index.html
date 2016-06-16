@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>XPC</title>
+    <meta http-equiv="Pragma" content="no-cache" />  
+    <meta http-equiv="Cache-Control" content="no-cache" />     
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="ImageToolbar" content="no" />
+	<link href="../../../apps/assets/base.css" rel="stylesheet" type="text/css" media="screen"/>
+
+	<link href="../assets/popup.css" rel="stylesheet" type="text/css" media="screen">
+    <style type="text/css">
+		/*main*/
+		#main{width:640px;margin:10px auto;text-align:left}
+		#main a {font-size:14px;text-decoration:none;}
+		#main a:hover {text-decoration:underline;}
+		#main body{margin-bottom:3em;margin-top:1em;}
+		#main pre{text-align:left;padding-left:1em;font-family:Courier New;border:1px solid #317336;border-left:10px solid #317336;font-size:12px;margin:5px 0 20px 0;}
+		#main h1{font-size:2em;font-weight:bold;margin-bottom:1em}
+		#main h2{font-weight:bold;font-size:1.2em;margin-bottom:.5em;margin-top:1em;}
+		#main p{margin : 10px 0;}
+		/*misc*/
+		#status1 {color:red;}
+    </style>
+    </head>
+	<body>
+	<div id="main">
+	<h1>XPC</h1>
+	<p>基于window.name和postMessage的跨域通讯</p>
+
+	<h2>一、示例：</h2>
+	<p>
+		<a target="_blank" href="demo.html">跨域双向通讯示例</a><br />
+		<a target="_blank" href="demo2.html">快速发送消息测试</a><br />
+	</p>
+	<h2>二、使用：</h2>
+	<p>准备工作：主页面iframe引入子页面，并确保两个页面都引入了xpc.js</p>
+	<p>
+		<h3>1、获取实例</h3>
+<pre>
+var xpc = new XPC();
+//如果需要通讯的iframe name不是默认的'XPC_IFRAME'，需要设置下：
+var xpc = new XPC({iframeName : 'your_iframe_name'});
+</pre>
+		<h3>2、发送消息</h3>
+<pre>
+var data = {test : 1}; //data可以为任何可被stringify的对象
+xpc.send(data);
+</pre>
+		<h3>3、接收消息</h3>
+<pre>
+xpc.on('message', function(e) {
+	console.log(e.data); //e.data即第2步发送的data
+};
+</pre>
+	</p>
+	</body>
+</html>

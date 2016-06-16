@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>请设置标题</title>
+	<style>
+	/* CSS reset */
+	body {
+		background: #FFF;
+		color: #000;
+		font: 12px/1.5 arial,\5b8b\4f53,georgia,verdana,helvetica,sans-serif;
+	}
+	
+	html,body,ul,ol,dl,dd,h1,h2,h3,h4,h5,h6,pre,form,fieldset,legend,input,button,textarea,p,blockquote,th,td {
+		margin: 0;
+		padding: 0;
+	}
+	
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+		table-layout: fixed;
+	}
+	ul, ol, menu {
+		list-style: none;
+	}
+	fieldset, img {
+		border: 0;
+	}
+	img,object,select,input,textarea,button {
+		vertical-align: middle;
+	}
+	article,aside,footer,header,section,nav,menu,figure,figcaption,hgroup,details {
+		display: block;
+	}
+	caption,th {
+		text-align: left;
+	}
+	h1,h2,h3,h4,h5,h6,input,textarea,select,address,caption,cite,code,dfn,em,i,b,strong,small,th,var,abbr {
+		font-size: 100%;
+		font-style: normal;
+	}
+	q:before,q:after {
+		content: '';
+	}
+	ins,s,u,del {
+		text-decoration: none;
+	}
+	a {
+		color: #056e9e;
+		text-decoration: none;
+	}
+	a:hover {
+		color: #f00;
+	}
+	
+	
+	.example {
+		border: 1px #CCC solid;
+		margin: 15px 30px;
+		padding: 5px 10px;
+	}
+	.example.succ {
+		background-color: #99E999;
+	}
+	.example.fail {
+		background-color: #F88B7C;
+	}
+	.run,
+	.edit-code {
+		width: 100px;
+		height: 24px;
+		font-size: 14px;
+	}
+	
+	.edit-code {
+		margin-left: 30px;
+	}
+	
+	pre {
+		width: 100%;
+		height: 120px;
+	}
+	
+	textarea {
+		display: block;
+		width: 100%;
+		height: 114px;
+		font-family: Courier New;
+		font-size: 12px;
+	}
+	em.note {
+		color: red;
+	}
+	.example textarea {
+		display: none;
+	}
+	</style>
+<style>
+h2 {
+	font-family: Georgia,Times,"Times New Roman",serif;
+	font-size: 1.5em;
+}
+
+dt {
+	font-style: normal;
+	font-weight: bold;
+}
+dd {
+	margin-bottom: .5em;
+	padding-left: 15px;
+}
+
+.wrap {
+	min-width: 760px;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.section-title {
+	margin-top: 30px;
+	font-weight: bold;
+	font-size: 2em;
+	border-bottom: 3px solid #999;
+}
+</style>
+<link rel="stylesheet" href="../../../apps/assets/base.css">
+<script src="http://s0.qhimg.com/lib/qwrap/113.js"></script>
+<script src="../../../_thirdparty/codehighlight_and_page.js"></script>
+<head>
+<body>
+	<div id="doc3">
+<div id="bd">
+	<h2 class="section-title" id="Ajax.get_.htm">&raquo; QW.Ajax.get(url, [data], [callback])</h2>
+	<p>GET方式的Ajax请求</p>
+	<h2>参数：</h2>
+	<dl>
+		<dt><code>url {String|HTMLFormElement}</code></dt>
+		<dd>Ajax请求的url。</dd>
+	</dl>
+	<dl>
+		<dt><code>data {String|Object|HTMLFormElement}</code></dt>
+		<dd>发送的数据。</dd>
+	</dl>
+	<dl>
+		<dt><code>callback(responseText) {Function}</code></dt>
+		<dd>请求完成后的回调函数，responseText {String}为服务器响应的字符串。</dd>
+	</dl>
+	
+	<div class="section-ctn">
+		<h3 name="QW.Ajax.get-example-1">例子1：url参数为HTMLFormElement对象，data参数忽略</h3>
+		<textarea class="code code_js">
+		var htmlFrag = 
+		'<form id="ajax-form" action="reverse.php" method="post">' +
+			'<input type="hidden" name="t" size="100" value="forEach executes the provided function (callback) once for each element present in the array">' +
+		'</form>';
+		QW.Ajax.get(W(htmlFrag)[0], function(responseText) {
+			alert(responseText);
+		});
+		</textarea>
+	</div>
+
+	<div class="section-ctn">
+		<h3 name="QW.Ajax.get-example-2">例子2：url参数为url（包含query string），data参数忽略</h3>
+		<textarea class="code code_js">
+		QW.Ajax.get('reverse.php?t=jQuery%20is%20designed%20to%20change%20the%20way%20that%20you%20write%20JavaScript', function(responseText) {
+			alert(responseText);
+		});
+		</textarea>
+	</div>
+
+	<div class="section-ctn">
+		<h3 name="QW.Ajax.get-example-3">例子3：url参数为url，data参数为JSON对象</h3>
+		<textarea class="code code_js">
+		QW.Ajax.get('reverse.php', {t: 'This algorithm is exactly the one specified in ECMA-262', from: 'example2'}, function(responseText) {
+			alert(responseText);
+		});
+		</textarea>
+	</div>
+
+	<div class="section-ctn">
+	<h3 name="QW.Ajax.get-example-4">例子4：url参数为url，data参数为HTMLFormElement对象</h3>
+		<textarea class="code code_js">
+		var htmlFrag = 
+		'<form id="ajax-form" action="reverse.php" method="post">' +
+			'<input type="hidden" name="t" size="100" value="forEach executes the provided function (callback) once for each element present in the array">' +
+		'</form>';
+		QW.Ajax.get('reverse.php', W(htmlFrag)[0], function(responseText) {
+			alert(responseText);
+		});
+		</textarea>
+	</div>
+
+	<h2  class="section-title" id="Ajax.post_.htm">&raquo; QW.Ajax.post(url, [data], [callback])</h2>
+	<p>QW.Ajax.post(url, [data], [callback])用法和<a href="#Ajax.get_.htm">QW.Ajax.post(url, [data], [callback])</a>完全相同。只需要把示例中的get换成post即可。</p>
+</div>
+</body>
+<html>

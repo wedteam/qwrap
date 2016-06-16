@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>SmokingTest</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../../../../js/apps/assets/base.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="../assets/page.css" rel="stylesheet" type="text/css" media="screen"/>
+<script type="text/javascript" src="../../../../js/apps/core_dom_pure.js"></script>
+<script type="text/javascript" src="../SmokingTest.js"></script>
+</head>
+
+<body>
+<div id=doc3>
+	<h1 class="page-h1">冒烟测试. 小工具</h1>
+	<div id=hd>
+		<!-- keep it -->
+	</div>
+	<div id="bd" >
+		<div class="section-ctn" id="ST_ctn">
+		</div>
+	</div>
+	<div id="ft">
+		QW
+	</div>
+</div>
+
+<script>
+	SmokingTest.init(document.getElementById("ST_ctn"),["QW","window"],'SmokingTest.dump(String.prototype)');
+</script>
+</body>
+</html>

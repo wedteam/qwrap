@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Ajax Demo</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="../../../apps/assets/base.css" rel="stylesheet" type="text/css" media="screen"/>
+	<style>
+	li label {width:120px;display: -moz-inline-box; display: inline-block;text-align:right;background-color:#ccc;}
+	</style>
+	<script type="text/javascript" src="../../../apps/core_dom_youa.js"></script>
+	<script type="text/javascript" src="../ajax_retouched.js"></script>
+</head>
+<body>
+<div id=doc3>
+	<div id="bd" >
+		<div class="section-ctn">
+			<h3 class="section-hd" onclick="W(this).nextSibling('div').toggle();" >Ajax构造器：（Ajax组件原生用法）---不推荐 <span style="padding-left:100px;color:blue;">点击展开详情</span></h3>
+			<div style="display:none;">
+			<div style="padding-left:30px;">
+/**<br/>
+* @class Ajax Ajax类的构造函数<br/>
+* @param {json} options 构造参数
+	<table border=1 cellspacing=0 cellpadding=2 style="margin-left:20px;">
+	<tr><td> options属性	</td><td>		说明					</td><td>	默认值		</td></tr>
+	<tr><td> url: 			</td><td>	请求的路径					</td><td>	空字符串	</td></tr>
+	<tr><td> method: 		</td><td>	请求的方法					</td><td>	get			</td></tr>
+	<tr><td> async: 		</td><td>	是否异步请求				</td><td>	true		</td></tr>
+	<tr><td> user:			</td><td>	用户名						</td><td>	空字符串	</td></tr>
+	<tr><td> pwd:			</td><td>	密码						</td><td>	空字符串	</td></tr>
+	<tr><td> requestHeaders:</td><td>	请求头属性					</td><td>	{}			</td></tr>
+	<tr><td> data:			</td><td>	发送的数据，可以是字符串、表单、Json</td><td>	空字符串	</td></tr>
+	<tr><td> useLock:		</td><td>	是否使用锁机制				</td><td>	false		</td></tr>
+	<tr><td> timeout:		</td><td>	设置请求超时的时间（ms）	</td><td>	30000		</td></tr>
+	<tr><td> onsucceed:		</td><td colspan=2 >	请求成功监控 (成功指：200-300以及304)	</td></tr>
+	<tr><td> onerror:		</td><td colspan=2 >	请求失败监控							</td></tr>
+	<tr><td> oncancel:		</td><td colspan=2 >	请求取消监控							</td></tr>
+	<tr><td> oncomplete:	</td><td colspan=2 >	请求结束监控 (success与error都算complete)</td></tr>
+	</table>
+* @return {Ajax} <br/>
+*/</pre>
+			</div>
+			<ul class=panel-args id="ajax-args" >
+				<li><label>url:</label><input id="P-url" value="AjaxServer.php"> 请求地址</li>
+				<li><label>method:</label><input id="P-method" value="get"> get or post</li>
+				<li><label>async:</label><input id="P-async" type=checkbox value="" checked > 是否异步</li>
+				<li><label>user:</label><input id="P-user" value="" disabled> 授权相关</li>
+				<li><label>pwd:</label><input id="P-pwd" value="" disabled> 授权相关</li>
+				<li><label>requestHeaders:</label><input id="requestHeaders" value="{}"> 添加或更改请求头</li>
+				<li><label>data:</label><input id="P-data" value="delay=2000"> 请求参数数据</li>
+				<li><label>useLock</label><input id="P-useLock" type=checkbox value="" > 是否使用锁机制</li>
+				<li><label>timeout:</label><input id="P-timeout" value="3000"> 超时判断依据时间</li>
+			</ul>
+			<button onclick="getCode();">根据以上条件，得到相应代码</button>
+			<button onclick="eval(g('code1').value);" id="evalBtn">运行以下textarea里的代码</button>
+			<button onclick="myAjax.send();" >重复send myAjax</button>
+			<button onclick="myAjax.cancel();" >cancel myAjax</button>
+			<br/>
+			<textarea id="code1" style="width:750px;height:200px;">		
+			</textarea>
+			</div>
+		</div>
+
+		<div class="section-ctn">
+			<h3 class="section-hd" onclick="W(this).nextSibling('div').toggle();" >Ajax静态用法 get</h3>
+			<div style="display:;">
+			<pre style="padding-left:30px;">/**
+ * 静态get方法
+ * @method get
+ * @static
+ * @param {String|Form} url 请求的地址
+ * @param {String|Json|Form} data (Optional)发送的数据
+ * @param {Function} callback 请求完成后的回调
+ * @returns {Ajax}
+ * @example
+	QW.Ajax.get('http://demo.com',{key: 'value'},function(responseText){alert(responseText);});
+ */
+			</pre>
+			<button onclick="W(this).nextSibling('textarea').val().evalJs();" >运行以下textarea里的代码</button>
+			<br/>
+			<textarea id="code1" style="width:750px;height:50px;">Ajax.get('AjaxServer.php',function(responseText){alert(responseText);})
+			</textarea>
+			</div>
+		</div>
+
+		<div class="section-ctn">
+			<h3 class="section-hd" onclick="W(this).nextSibling('div').toggle();" >Ajax静态用法 post</h3>
+			<div style="display:;">
+			<pre style="padding-left:30px;">/**
+ * 静态post方法
+ * @method post
+ * @static
+ * @param {String|Form} url 请求的地址
+ * @param {String|Json|Form} data (Optional)发送的数据
+ * @param {Function} callback 请求完成后的回调
+ * @returns {Ajax}
+ * @example
+	QW.Ajax.post('http://demo.com',{key: 'value'},function(responseText){alert(responseText);});
+ */
+			</pre>
+			<button onclick="W(this).nextSibling('textarea').val().evalJs();" >运行以下textarea里的代码</button>
+			<br/>
+			<textarea id="code1" style="width:750px;height:50px;">Ajax.post('AjaxServer.php',function(responseText){alert(responseText);})
+			</textarea>
+			</div>
+		</div>
+
+		<div class="section-ctn">
+			<h3 class="section-hd" onclick="W(this).nextSibling('div').toggle();" >Ajax静态用法 request</h3>
+			<div style="display:;">
+			<pre style="padding-left:30px;">/**
+ * 静态request方法
+ * @method request
+ * @static
+ * @param {String|Form} url 请求的地址。（也可以是Json，当为Json时，则只有此参数有效，会当作Ajax的构造参数）。
+ * @param {String|Json|Form} data (Optional)发送的数据
+ * @param {Function} callback 请求完成后的回调
+ * @param {String} method (Optional) 请求方式，get或post
+ * @returns {Ajax}
+ * @example
+	QW.Ajax.request('http://demo.com',{key: 'value'},function(responseText){alert(responseText);});
+ */
+			</pre>
+			<button onclick="W(this).nextSibling('textarea').val().evalJs();" >运行以下textarea里的代码</button>
+			<br/>
+			<textarea id="code1" style="width:750px;height:50px;">QW.Ajax.request('AjaxServer.php',{key: 'value'},function(responseText){alert(responseText);},'get');
+			</textarea>
+			</div>
+		</div>
+
+		<div class="section-ctn">
+			<h3 class="section-hd" onclick="W(this).nextSibling('div').toggle();" >按项目逻辑需求retouch后的用法----<a href="../ajax_retouch.js" target="_blank" onclick="EventH.stopPropagation();">ajax_retouch.js</a></h3>
+			<div style="display:;">
+			<form id="testForm" action="AjaxServer.php" method="get">
+			<button onclick="W(this).nextSibling('textarea').val().evalJs();return false;" >运行以下textarea里的代码</button>
+			<br/>
+			<textarea id="code1" style="width:750px;height:100px;">			W('#testForm').ajaxForm(function(text){alert(text);});
+			Ajax.post('AjaxServer.php','err=mcphp.fatal',function(responseText){var status=this.opResults();alert(status.err);});
+			//需要php运行。opResults解析返回json。
+			//把数据改成'err=mcphp.ok'以示能正确解析服务器返回的json。
+			</textarea>
+			</form>
+			</div>
+		</div>
+
+	</div>
+	<div id="ft">
+		QWrap (<a href="http://www.qwrap.com">www.qwrap.com</a>)
+	</div>
+
+</div>
+</body>
+<script>
+function g(id){
+	return document.getElementById(id);
+}
+function getCode(){
+	var els=g("ajax-args").getElementsByTagName("input");
+	var json={};
+	for(var i=0;i<els.length;i++){
+		var el=els[i];
+		if(!el.id || el.id.indexOf('P-')==-1) continue;
+		var key=el.id.substr(2);
+		switch(el.type){
+			case "text":
+			case "textarea":
+			case "select-one":
+				json[key]=el.value;
+				break;
+			case "checkbox":
+				json[key]=el.checked;
+				break;
+		}
+	}
+	if (g('requestHeaders').value) {
+		try {
+			json.requestHeaders = QW.StringH.evalExp(g('requestHeaders').value);
+		} catch(ex) {;}
+	}
+	var s=['var opts=',QW.ObjectH.stringify(json),';',
+		'window.myAjax=new QW.Ajax(opts);',
+		'myAjax.oncancel=function(){g("code1").value=("cancel.");};',
+		'myAjax.onsucceed=function(){g("code1").value=("succeed.");};',
+		'myAjax.onerror=function(){g("code1").value=("error/timeout.");};',
+		'myAjax.oncomplete=function(){g("code1").value+=("complete with state "+this.state+":"+this.requester.responseText);};',
+		'myAjax.send();'
+	];
+	g('code1').value=s.join("\n");
+}
+
+</script>
+</html>

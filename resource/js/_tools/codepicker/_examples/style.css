@@ -1,0 +1,18 @@
+body{margin-bottom:3em;margin-top:1em;font-size:14px;overflow-y:scroll;}
+div{width:720px;margin:10px auto;}
+h1{font-size:2em;font-weight:bold;margin-bottom:1em}
+h2{font-weight:bold;font-size:1.2em;margin-bottom:.5em;margin-top:1em;}
+dl{border-top:1px solid #aaa;margin-top:5px;}
+dt{font-weight:bold;margin:1em .5em;}
+dd{margin-left:0;}
+.cls {zoom:1;}
+.cls:after {content:"";visibility:hidden;display:block;height:0;clear:both;}
+li{list-style:none;float:left;display:block}
+fieldset {margin-bottom:.5em;}
+fieldset ul{margin:3px;padding:0;}
+fieldset input, fieldset select{margin-right:.2em;}
+fieldset.hid ul {display:none;}
+fieldset.hid .chkall, fieldset.hid .chknone, fieldset.hid .chkreverse {display:none;}
+legend a {margin-left:15px;}
+.list li{width:24%;}
+textarea {font-size:12px;}img{display:none;}

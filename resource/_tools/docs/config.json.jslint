@@ -1,0 +1,15 @@
+{
+	// JavaScript files to check
+	"includes": ["test/src"],
+	
+	// Exclude files
+	"excludes": [],
+	
+	// Exclude file names
+	"excludeNames": ["svn", "CVS", "*.bak", "*.pl", "*.sh", "*.ini", "*.jar", "_"],
+	
+	// Output directory
+	"outPath": "test_output",
+	
+	"e": "GBK"
+}

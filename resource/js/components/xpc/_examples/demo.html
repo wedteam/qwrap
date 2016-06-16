@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>XPC Demo</title>
+	<script type="text/javascript" src="../../../apps/core_dom_youa.js"></script>
+	<script type="text/javascript" src="../../../components/xpc/xpc.js"></script>
+    </head>
+	<body>
+		<iframe name="XPC_IFRAME" src="http://qgy18.imququ.com/qwrap_test/components/xpc/_examples/child.html"></iframe>
+		<div><input type="text" id="txt" size="20" /><input id="send" type="button" value="发给跨域iframe" /></div>
+		<div id="output"></div>
+		<script type="text/javascript">
+		W(window).on('load', function() {
+			var xpc = new XPC();
+			W('#send').on('click', function() {
+				xpc.send(W('#txt').val());
+			});
+
+			xpc.on('message', function(e) {
+				W('#output').html(e.data + '<br>' + W('#output').html());
+			});
+		});
+		</script>
+	</body>
+</html>

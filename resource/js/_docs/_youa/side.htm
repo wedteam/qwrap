@@ -1,0 +1,443 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>QWrap 应用手册</title>
+<link type="text/css" media="screen" rel="stylesheet" href="css/css.css">
+<script type="text/javascript" src="js/apps/qwrap.js"></script>
+<script type="text/javascript" src="js/qwrapdoc/doc_qwrap.js"></script>
+<script type="text/javascript">
+Dom.ready(function(){
+	//选项卡的切换
+	W("#slideTab a").click(function(e){
+		e.preventDefault();
+		if(!W(this).hasClass('on')){
+			var activeEl=this;
+			W(this.parentNode).query('a').set(
+				function (el){
+					if(el == activeEl) W.show(W(el).addClass('on').attr('tabFor'));
+					else W.hide(W(el).removeClass('on').attr('tabFor'));
+				}
+			);
+		}
+		return false;
+	});
+	
+	//目录树
+	W('#catalog').delegate('span.folder-img','click',function(e){
+		var display=W(this).hasClass("folder-img-open")?'none':'';
+		W(this).toggleClass("folder-img-open","folder-img-closed").nextSibling('ul').show(display);
+	});
+
+	//search事件
+	var keyupTimer=0,
+		searchEl=g('searchInput'),
+		timeoutFun=function(e){
+			var val=searchEl.value.trim().toLowerCase();
+				els=g('keyList').childNodes;
+			for(var i=0,el;el=els[i++];){
+				if(el.tagName!='LI') continue;
+				var eltext=el.firstChild.innerHTML.toLowerCase();
+				if(eltext.indexOf(val) >-1) el.style.display="block";
+				else el.style.display='none';
+			}
+		},
+		keyupHandle=function(e){
+			if(keyupTimer) clearTimeout(keyupTimer);
+			keyupTimer=setTimeout(timeoutFun,200);
+		};
+	W('#searchInput').on('keyup',keyupHandle).on('mouseup',keyupHandle);
+	
+	try{
+		var searchStr=top.location.search,
+			idx=searchStr.indexOf('content=');
+		if(idx>=0){
+			top.document.getElementById('contents').src=searchStr.substr(idx+8);
+		}
+	}
+	catch(ex){;}
+});	
+</script>
+<base target="contents"></base>
+</head>
+<body>
+	<!-- tab start -->
+	<div id="slideTab">
+    	<a href="#catalog" class="on" tabFor="catalog">目录</a>
+        <a href="#index" tabFor="index">索引</a>
+    </div>
+	<!-- tab end -->
+	<!-- cont start -->
+	<div id="catalog" class="slide_for_chg">
+
+		<ul class="tree-wrap">
+			<li>
+				<div class="node-ctn tree-lever1"><a href="content.htm" target="contents">&nbsp;>>速查表(回到API首页)</a></div>
+			</li>
+			<li>
+				<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn tree-lever1">QW根命名空间方法</div>
+				<ul class="tree-wrap-inner" style="display:none">
+					<script type="text/javascript" style="display:none">
+						QWDoc.writeLinks('qw/base/',QWDoc.data.QW._base);
+					</script>
+				</ul>
+			</li>
+		</ul>
+		<ul class="tree-wrap">
+
+			<li>
+				<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn tree-lever1">NodeW应用（元素包装）</div>
+				<ul class="tree-wrap-inner" style="display:none">
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">获取W实例</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script type="text/javascript" style="display:none">
+								QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW._base);
+								QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW._static);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">泛数组方法</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script type="text/javascript" style="display:none">
+								QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.arrayLike);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">属性相关</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script type="text/javascript" style="display:none">
+								QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.property);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">Css相关</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script type="text/javascript" style="display:none">
+								QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.css);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">class相关</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script type="text/javascript" style="display:none">
+								QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.className);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">display相关</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script type="text/javascript" style="display:none">
+								QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.display);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">位置大小相关</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script type="text/javascript" style="display:none">
+								QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.rect);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">动画</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script type="text/javascript" style="display:none">
+								QWDoc.writeLinks('qw/anim/index.htm#',QWDoc.data.QW.NodeW.anim);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">节点操作相关</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script type="text/javascript" style="display:none">
+								QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.domOp);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">获取亲属元素相关</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script type="text/javascript" style="display:none">
+								QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.queryer);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">Jss相关</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script type="text/javascript" style="display:none">
+								QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.jss);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">事件操作</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script type="text/javascript" style="display:none">
+								QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.eventtarget);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">w.on、w.un的事件类型</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script type="text/javascript" style="display:none">
+								QWDoc.writeLinks('qw/nodew/index.htm#',QWDoc.data.QW.NodeW._eventtypes);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">w.delegate、w.undelegate的事件类型</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script type="text/javascript" style="display:none">
+								QWDoc.writeLinks('qw/nodew/index.htm#',QWDoc.data.QW.NodeW._delegateeventtypes);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">其它</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script type="text/javascript" style="display:none">
+								QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW._others);
+							</script>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		
+		<ul class="tree-wrap">
+			<li>
+				<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn tree-lever1">Ajax静态方法</div>
+				<ul class="tree-wrap-inner" style="display:none">
+					<script type="text/javascript" style="display:none">
+						QWDoc.writeLinks('qw/ajax/index.htm#',QWDoc.data.QW.Ajax._static);
+					</script>
+				</ul>
+			</li>
+		</ul>
+
+		<ul class="tree-wrap">
+			<li>
+				<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn tree-lever1">Dom静态方法</div>
+				<ul class="tree-wrap-inner" style="display:none">
+					<script type="text/javascript" style="display:none">
+						QWDoc.writeLinks('qw/dom/',QWDoc.data.QW.Dom._static);
+					</script>
+				</ul>
+			</li>
+		</ul>
+
+		<ul class="tree-wrap">
+			<li>
+				<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn tree-lever1">事件相关</div>
+				<ul class="tree-wrap-inner" style="display:none">
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">原生dom事件</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<li><a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html" target="_blank">W3C DOM Events标准</a></li>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">QWrap retouch后的Event</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script type="text/javascript" style="display:none">
+								QWDoc.writeLinks('qw/domevent/index.htm#',QWDoc.data.QW.DomEvent._base);
+								QWDoc.writeLinks('qw/domevent/',QWDoc.data.QW.DomEvent._methods);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">CustEvent(组件开发用)</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script>
+								QWDoc.writeLinks('qw/custevent/',QWDoc.data.QW.CustEvent._base);
+								QWDoc.writeLinks('qw/custevent/',QWDoc.data.QW.CustEvent._static);
+								QWDoc.writeLinks('qw/custevent/index.htm#',QWDoc.data.QW.CustEvent._prot);
+								QWDoc.writeLinks('qw/custevent/',QWDoc.data.QW.CustEvent._methods);
+								QWDoc.writeLinks('qw/custevent/',QWDoc.data.QW.CustEvent.custeventtarget);
+							</script>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+		<ul class="tree-wrap">
+			<li>
+				<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn tree-lever1">JS原生对象扩展</div>
+				<ul class="tree-wrap-inner" style="display:none">
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">对象操作</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script>
+								QWDoc.writeLinks('qw/objecth/',QWDoc.data.QW.ObjectH._methods);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">字符串操作</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script>
+								QWDoc.writeLinks('qw/stringh/',QWDoc.data.QW.StringH._methods);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">数组操作</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script>
+								QWDoc.writeLinks('qw/arrayh/',QWDoc.data.QW.ArrayH._methods);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">函数/类操作</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script>
+								QWDoc.writeLinks('qw/functionh/',QWDoc.data.QW.FunctionH._methods);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">日期操作</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script>
+								QWDoc.writeLinks('qw/dateh/',QWDoc.data.QW.DateH._methods);
+							</script>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">JSON</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script>
+								QWDoc.writeLinks('qw/json/',QWDoc.data.QW.JSON._methods);
+							</script>
+						</ul>
+					</li>
+
+				</ul>
+			</li>
+		</ul>
+		<ul class="tree-wrap">
+			<li>
+				<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn tree-lever1">QW自带组件</div>
+				<ul class="tree-wrap-inner" style="display:none">
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">Ajax</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script>
+								QWDoc.writeLinks('qw/ajax/index.htm#',QWDoc.data.QW.Ajax._static);
+							</script>
+							<li><a href="qw/ajax/index.htm#">更多Ajax</a></li>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">Anim 动画</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script>
+								QWDoc.writeLinks('qw/anim/index.htm#',QWDoc.data.QW.NodeW.anim);
+							</script>
+							<li><a href="qw/anim/index.htm#">更多动画</a></li>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">Async 异步队列</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<script>
+							</script>
+							<li><a href="../../components/async/_examples/async.html#basic">基本用法</a></li>
+							<li><a href="../../components/async/_examples/async.html#basic">Async与动画</a></li>
+							<li><a href="../../components/async/_examples/async.html#basic">Async任务与取消任务</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+		<ul class="tree-wrap">
+			<li>
+				<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn tree-lever1">QW其它组件</div>
+				<ul class="tree-wrap-inner" style="display:none">
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">Twitter 消息机制</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<li><a href="../../components/twitter/_examples/tweet_retouch.html">基本用法</a></li>
+							<li><a href="../../components/twitter/_examples/tweet_async.html">异步消息推送</a></li>
+						</ul>
+					</li>
+					<li>
+						<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn">TabView、Slide</div>
+						<ul class="tree-wrap-inner" style="display:none">
+							<li><a href="../../components/switch/_examples/index.html">幻灯片</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+		<ul class="tree-wrap">
+			<li>
+				<span class="folder-img folder-img-closed">&nbsp;</span><div class="node-ctn tree-lever1">相关链接</div>
+				<ul class="tree-wrap-inner" style="display:none">
+					<li><a href="http://www.qwrap.com" target="_blank">QWrap 官网</a></li>
+					<li><a href="http://github.com/wedteam/qwrap" target="_blank">QWrap Github地址</a></li>
+					<li><a href="qw/base/index.htm" target="contents">QWrap脚本库简介</a></li>
+					<li><a href="../QWrap-Design.ppt" target="_blank">QWrap设计ppt</a></li>
+					<li><a href="../../_tools/speedmatch/_examples/SelectorSpeed.html" target="_blank">Selector性能测试</a></li>
+					<li><a href="../../core/_tests/UnitTest_Core.html" target="_blank">core_pure单元测试</a></li>
+					<li><a href="../../dom/_tests/UnitTest_Dom.html" target="_blank">dom单元测试</a></li>
+					<li><a href="../../_tools/codepicker/_examples/index.html" target="_blank" style="color:red">QWrap代码定制(屈屈版)</a></li>
+					<li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div id="index" class="slide_for_chg" style="display:none;">
+		<p class="search_top_word">输入要查找的关键字：</p>
+		<input id="searchInput" type="text">
+		<ul id="keyList">
+			<script type="text/javascript" style="display:none">
+				QWDoc.writeLinks('qw/base/',QWDoc.data.QW._base);
+				QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW._base);
+				QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW._static);
+				QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.arrayLike);
+				QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.property);
+				QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.css);
+				QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.className);
+				QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.display);
+				QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.rect);
+				QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.domOp);
+				QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.queryer);
+				QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.jss);
+				QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW.eventtarget);
+				QWDoc.writeLinks('qw/nodew/',QWDoc.data.QW.NodeW._others);
+				QWDoc.writeLinks('qw/dom/',QWDoc.data.QW.Dom._static);
+				QWDoc.writeLinks('qw/domevent/index.htm#',QWDoc.data.QW.DomEvent._base);
+				QWDoc.writeLinks('qw/domevent/',QWDoc.data.QW.DomEvent._methods);
+				QWDoc.writeLinks('qw/custevent/',QWDoc.data.QW.CustEvent._base);
+				QWDoc.writeLinks('qw/custevent/',QWDoc.data.QW.CustEvent._static);
+				QWDoc.writeLinks('qw/custevent/index.htm#',QWDoc.data.QW.CustEvent._prot);
+				QWDoc.writeLinks('qw/custevent/',QWDoc.data.QW.CustEvent._methods);
+				QWDoc.writeLinks('qw/custevent/',QWDoc.data.QW.CustEvent.custeventtarget);
+				QWDoc.writeLinks('qw/objecth/',QWDoc.data.QW.ObjectH._methods);
+				QWDoc.writeLinks('qw/stringh/',QWDoc.data.QW.StringH._methods);
+				QWDoc.writeLinks('qw/arrayh/',QWDoc.data.QW.ArrayH._methods);
+				QWDoc.writeLinks('qw/functionh/',QWDoc.data.QW.FunctionH._methods);
+				QWDoc.writeLinks('qw/dateh/',QWDoc.data.QW.DateH._methods);
+				QWDoc.writeLinks('qw/ajax/index.htm#',QWDoc.data.QW.Ajax._static);
+				QWDoc.writeLinks('qw/anim/index.htm#',QWDoc.data.QW.NodeW.anim);
+			</script>
+		</li>
+	</div>
+	<!-- cont end -->
+	
+</body>
+</html>

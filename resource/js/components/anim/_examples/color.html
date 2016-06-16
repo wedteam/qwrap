@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>颜色渐变---Jerry Qu</title>
+	<script type="text/javascript" src="../../../apps/core_dom_youa.js"></script>
+	<script type="text/javascript" src="../../../components/anim/anim.js"></script>
+    <style type="text/css" title="default" media="screen">
+    /*<![CDATA[*/
+
+    /*]]>*/
+    </style>
+    </head>
+	<body>
+		<h3>点击方块</h3>
+		<div id="test1" style="cursor:pointer;position:absolute;top:50px;left:20px;width:100px;height:100px;background:#6B90DA;border:#333"></div>
+		<div id="test2" style="cursor:pointer;position:absolute;top:160px;left:20px;width:100px;height:100px;background:#f00;border:#333">红变绿</div>
+		<div id="test3" style="cursor:pointer;position:absolute;top:270px;left:20px;width:100px;height:100px;color:#fff;background:#000;border:#333">黑纸白字</div>
+		<div id="t"></div>
+		<script type="text/javascript">
+			//anim1
+			var anim1 = new QW.ElAnim("test1", {
+				"backgroundColor" : {
+					to : "#e06"
+				}
+			}, 3000);
+			
+			anim1.on("beforeplay",function(){
+				QW.g("test1").innerHTML = "";
+			});
+
+			anim1.on("reset",function(){
+				QW.g("test1").innerHTML = "finish";
+			});
+
+			//anim2
+			var anim2 = new QW.ElAnim("test2", {
+				"backgroundColor" : {
+					to   : "#0f0"
+				}
+			}, 3000);
+
+			//anim3
+			var anim3 = new QW.ElAnim("test3", {
+				"backgroundColor" : {
+					to   : "#fff"
+				},
+				"color" : {
+					to   : "#000"
+				}
+			}, 3000);
+
+			//addEventlistener
+			W.g("test1").on("click",function(){
+				anim1.play();
+				setTimeout(function(){
+					anim1.reset();
+				}, 3500);
+			});
+
+			W.g("test2").on("click",function(){
+				anim2.play();
+				setTimeout(function(){
+					anim2.reset();
+				}, 3500);
+			});
+
+			W.g("test3").on("click",function(){
+				anim3.play();
+				setTimeout(function(){
+					anim3.reset();
+				}, 3500);
+			});
+		</script>
+	</body>
+</html>

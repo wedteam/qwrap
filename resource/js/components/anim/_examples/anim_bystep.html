@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Anim Demo---算子、按帧播放、帧间隔时间</title>
+    <style type="text/css" title="default" media="screen">
+		body{font-size:13px}
+		#container{width:500px;height:500px;border:1px solid blue;position:relative}
+		div.dot{height:3px;width:3px;overflow:hidden;background-color:red;position:absolute}
+    </style>
+	<script type="text/javascript" src="../../../apps/core_dom_youa.js"></script>
+	<script type="text/javascript" src="../../../components/anim/anim.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var g = QW.NodeH.g;
+			var easings = [		//算子列表
+				QW.Easing.easeNone,
+				QW.Easing.easeIn,
+				QW.Easing.easeOut,
+				QW.Easing.easeBoth,
+				QW.Easing.easeInStrong,
+				QW.Easing.easeOutStrong,
+				QW.Easing.easeBothStrong,
+				QW.Easing.elasticIn,
+				QW.Easing.elasticOut,
+				QW.Easing.elasticBoth,
+				QW.Easing.backIn,
+				QW.Easing.backOut,
+				QW.Easing.backBoth,
+				QW.Easing.bounceIn,
+				QW.Easing.bounceOut,
+				QW.Easing.bounceBoth
+			];
+			
+			var btn = g('playBtn'),
+				easingSelect = g('easingSelect'),
+				frameTimeSelect = g('frameTimeSelect'),
+				byStepBox = g('byStepBox'),
+				container = g("container");
+			btn.disabled = false;
+			btn.onclick = function(){
+				btn.disabled = true;
+				//container.innerHTML = "";
+				var easing = easings[easingSelect.value],
+					startDate = new Date();
+				var anim = new QW.Anim(function(per){
+					var x = Math.round((new Date()-startDate)/10)-2;
+					var y = Math.round(easing(per)*500)-2;
+					var d = document.createElement("div");
+					d.className='dot';
+					d.style.left=x+"px";
+					d.style.bottom=y+"px";
+					container.appendChild(d);
+				}, 5000 , {byStep : byStepBox.checked, frameTime:frameTimeSelect.value*1});
+				anim.onend = function(){
+					btn.disabled = false;
+				};
+				anim.play();
+			};
+			g('emptyBtn').onclick = function() {
+				container.innerHTML = "";
+			};
+		};
+	</script>
+    </head>
+	<body>
+		<h2>动画类算子</h2>
+		<p>
+			算子：<select id="easingSelect">
+				<option value="0">QW.Easing.easeNone</option>
+				<option value="1">QW.Easing.easeIn</option>
+				<option value="2">QW.Easing.easeOut</option>
+				<option value="3">QW.Easing.easeBoth</option>
+				<option value="4">QW.Easing.easeInStrong</option>
+				<option value="5">QW.Easing.easeOutStrong</option>
+				<option value="6">QW.Easing.easeBothStrong</option>
+				<option value="7">QW.Easing.elasticIn</option>
+				<option value="8">QW.Easing.elasticOut</option>
+				<option value="9">QW.Easing.elasticBoth</option>
+				<option value="10">QW.Easing.backIn</option>
+				<option value="11">QW.Easing.backOut</option>
+				<option value="12">QW.Easing.backBoth</option>
+				<option value="13">QW.Easing.bounceIn</option>
+				<option value="14">QW.Easing.bounceOut</option>
+				<option value="15">QW.Easing.bounceBoth</option>
+			</select>&nbsp;&nbsp;  帧间隔时间：<select id="frameTimeSelect">
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+				<option value="14">14</option>
+				<option value="15">15</option>
+				<option value="16">16</option>
+				<option value="17">17</option>
+				<option value="18">18</option>
+				<option value="19">19</option>
+				<option value="20">20</option>
+				<option value="21">21</option>
+				<option value="22">22</option>
+				<option value="23">23</option>
+				<option value="24">24</option>
+				<option value="25">25</option>
+				<option value="26">26</option>
+				<option value="27">27</option>
+				<option value="28" selected>28</option>
+				<option value="29">29</option>
+				<option value="30">30</option>
+				<option value="31">31</option>
+				<option value="32">32</option>
+				<option value="33">33</option>
+				<option value="34">34</option>
+				<option value="35">35</option>
+				<option value="36">36</option>
+				<option value="37">37</option>
+				<option value="38">38</option>
+				<option value="39">39</option>
+			</select>&nbsp;&nbsp;  保时丢帧：<input type="radio" name="byStep" checked/> 保帧延时：<input type="radio" name="byStep" id="byStepBox"/>
+			<input type="button" value="绘图" id="playBtn"/>&nbsp;&nbsp;<input type="button" value="清空" id="emptyBtn"/>
+		</p>
+		<div id="container">
+
+		</div>
+	</body>
+</html>

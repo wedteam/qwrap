@@ -1,0 +1,274 @@
+QWrap入门指南
+
+前言：只需要引入这一个51K大小的js（gzip后大小为17K），就可以开始使用QWrap写代码了：
+
+<script src="http://dev.qwrap.com/download/latest/apps/qwrap_youa.com.js"></script>
+
+
+【目录】
+
+    一、NodeW装箱
+    二、泛数组操作
+    三、链式操作
+    四、获取值
+    五、gsetter
+    六、二次获取相关元素
+    七、节点操作
+    八、事件操作
+    九、Jss
+    十、Dom静态方法
+    十一、JS内部对象静态方法
+    十二、JS内部对象原型方法
+    十三、使用手册
+    十四、使用手册
+【正文】
+
+一、NodeW装箱
+
+NodeW是针对Dom节点的包装。
+我们可以把节点对装进NodeW的箱子里，然后用这个箱子上的功能按钮来操作箱子里的节点对象。
+NodeW也简写成W，即Wrap的首字母。
+我们把产生一个W对象的过程，叫作W装箱。
+
+先看一下我们有哪些装箱方式：
+    W(document)、W(document.body)    //直接装箱节点
+    W([document])、W([document.body.firstChild,document.body.lastChild])    //直接装箱节点数组
+    W('#myId')、 W('#myId div.aaa')    //通过Selector来获取元素，然后装箱
+    W('<input/>')、 W('<li>a</li><li>b</li>')    //通过HTML字符串来创建元素，然后装箱
+以上装箱结果都是装的是节点数组。以下方式也可以装箱单个元素：
+    W.one(document.body) //装单个元素
+    W.one('#id')    //通过Selector来获取元素，以第一个进行装箱；如果一个元素都没查到，则返回空
+    W.one('<input/><input/>')    //创建元素，对第一个元素进行装箱
+其中，selector的写法与css selector的写法一样。
+
+二、泛数组操作
+W装箱的结果是NodeW实例，它是一个ArrayLike，即：泛Array，它可以有以下类似于Array的一些操作：
+    var w = W('div');    //得到页面的所有div节点，进行装箱
+    w.length    //节点数
+    w[0]    //第一个节点
+    w.map(function(el){return el.id;})    //数组的map操作，本例是：得到所有节点的id组成的数组
+    w.forEach(function(){el.value='a'+Math.random();})    //数组的forEach，本例是：对每一个节点进行赋值
+    w.filter(function(){return el.value=='a';});    //数组filter，本例是：返回值为'a'的节点数组的装箱
+    w.toArray()    //转化成数组
+    w.first()    //对第一个节点进行装箱
+    w.last()    //对最后一个节点进行装箱
+    w.item(i)    //对第i个节点过行装箱
+
+三、链式操作
+NodeW实例可以进行很多节点操作，对于操作（setter或operator）性质的方法，操作完后都原箱返回，所以可以进行链式操作。
+    W('ul').addClass('aaa').show(); //对页面的ul进行装箱，之后addClass，然后show。
+返回原箱的操作方法有：
+    addClass
+    removeClass
+    replaceClass
+    toggleClass
+    show
+    hide
+    toggle
+    setXY
+    setSize
+    setInnerSize
+    setRect
+    setInnerRect
+    insertAdjacentHTML
+    insertAdjacentElement
+    insert
+    insertTo
+    appendChild
+    insertSiblingBefore
+    insertSiblingAfter
+    insertBefore
+    insertAfter
+    replaceNode
+    replaceChild
+    removeNode
+    empty
+    removeChild
+    set
+    setAttr
+    removeAttr
+    setValue
+    setHtml
+    setStyle
+    removeStyle
+    ……等等
+
+四、获取值
+可以通过NodeW实例来得到被装箱的节点的信息，NodeW实例有很多getter性质的方法，例如：
+    W('input').getValue() //获取第一个input的值
+    W('input').getValueAll() //获取所有的input的值组成的数组
+getter性质的方法有：
+    outerHTML
+    getXY
+    getXYAll
+    getSize
+    getSizeAll
+    getRect
+    getRectAll
+    get
+    getAll
+    getAttr
+    getAttrAll
+    getValue
+    getValueAll
+    getHtml
+    getHtmlAll
+    encodeURIForm
+    getStyle
+    getStyleAll
+    getCurrentStyle
+    getCurrentStyleAll
+    borderWidth
+    paddingWidth
+    marginWidth
+还有几个判断性质的getter：
+    hasClass
+    isVisible
+    contains
+    isFormChanged
+
+五、gsetter
+有时候，getter与setter能够配成对，产生gsetter，gsetter会根据参数个数决定是getter还是setter，例如
+    W('input').val('aaa').val();//对面页抽有的input调值，并返回第一个input的值
+类似的gsetter方法有：
+    val    //按参数个数决定是调用getValue还是setValue
+    html    //按参数个数决定是调用getHtml还是setHtml
+    attr    //按参数个数决定是调用getAttr还是setAttr
+    css    //按参数个数决定是调用getCurrentStyle还是setStyle
+    size    //按参数个数决定是调用getSize还是setInnerSize
+    xy    //按参数个数决定是调用getXY还是setXY
+
+六、二次获取相关元素
+NodeW对象还有一些方法，可以获取相关元素，并且重新装箱，例如：
+W(document.body).query('>div')    //得到body的div儿子数组，并且进行装箱。由于返回的是装箱结果，所以可以继续调用NodeW对象所具有的各种方法
+获取相关节点的方法还有：
+    query
+    getElementsByClass
+    nextSibling
+    previousSibling
+    ancestorNode
+    parentNode
+    firstChild
+    lastChild
+    另外，colneNode方法与以上方法也有点类似，是返回clone出的新对象的NodeW装箱
+
+ 七、节点操作
+已并到“链式操作”里讲过了。
+
+八、事件操作
+NodeW也拥有一系列的事件操作方法，例如：
+    var w = W('#div1');
+    w.on('click',handler) //添加事件监控
+    w.un('click',handler) //移除事件监控
+    w.fire('click')    //触发事件监控
+    w.delegate('li','click',handler) //添加事件代理
+    w.delegate('li','click',handler) //移除事件代理
+
+九、Jss
+Jss是QWrap提供的一套全新的节点与js数据建立关系的机制，我们可以像定义css一样，为某一类元素预定义数据。
+例如：
+    Jss.addRule('.aaa',{age:10});
+    var w=W('<input class="aaa" data-jss="name:\'Tom\'">');
+    alert(w.getJss('name'));//should be: Tom
+    alert(w.getJss('age'));//should be: 10
+
+
+十、Dom静态方法
+QWrap也提供一套Dom的静态方法，例如：
+    Dom.ready(handler, doc)    //DomReady
+    Dom.query(sSelector, refEl)    //得到纯净的节点数组
+    Dom.create(html, rfrag, doc)    //根据html创建元素
+    Dom.createElement(tagName, property, doc)    //根据tagName与属性创建元素
+    Dom.getDocRect(doc)    //得到dom的Rect信息
+    Dom.isElement(el)    //判断一个对象是否是元素
+    Dom.pluckWhiteNode(list)    //忽略空节点
+    Dom.rectContains(rect1, rect2)    //判断rect是否包含另一个rect
+    Dom.rectIntersect(rect1, rect2)    //两个rect求交集
+
+
+十一、JS内部对象静态方法
+QWrap为JS内部对象添加一些静态方法，
+对Object添加以下方法：
+    Object.isArray(obj)    //判断对象是否是数组
+    Object.isArrayLike(obj)    //判断对象是否是ArrayLike
+    Object.isElement(obj)    //判断对象是否是html元素
+    Object.isFunction(obj)    //。。。
+    Object.isObject(obj)    //。。。
+    Object.isPlainObject(obj)    //。。。
+    Object.isString(obj)    //。。。
+    Object.dump(obj, props)    //输出指定属性
+    Object.fromArray(obj, keys, values)    //按keys与values来扩充对象
+    Object.get(obj, prop, nullSensitive)    //强get //某些情况下，可以用ObjectH.get(obj,'a.b.c.d')来代替obj.a && obj.a.b && obj.a.b.c && obj.a.b.c.d
+    Object.keys(obj)    //获取keys
+    Object.map(obj, fn, thisObj)    //参考array的map，实现Object的map
+    Object.mix(des, src, override)    //mixin
+    Object.set(obj, prop, value)    //强set
+    Object.stringify(obj)    //序列化 //stringify向JSON.stringify靠齐，不过不支持第二个参数
+    Object.values()    //获取values
+对Function添加以下方法：
+    Function.bind(func, thisObj)    //按标准扩展
+    Function.methodize(func, attr)    //静态函数方法化
+    Function.mul(func, opt)    //让方法的第一个参数可以是数组
+    Function.createInstance(class)    //按标准扩展
+    Function.extend(class, p)    //类继承   //各个库实现的类继承千差万别，本实现由月影与好奇提供。
+
+十二、JS内部对象原型方法
+为了方便调用，在有啊版的QWrap应用中，也对某些JS内部对象的原型进行的污染。这个动作有利有弊，可以自己决定是否污染。
+字符串相关
+    s.byteLen()    //获取字节长度
+    s.camelize()    //驼峰化
+    s.contains(subStr)    //判断一个字符串是否包含另一个字符串
+    s.dbc2sbc()    //全角转半角
+    s.decamelize()    //反驼峰化
+    s.decode4Html()    //为html作转码
+    s.encode4Html()    //为html作解码
+    s.encode4HtmlValue()    //为htmlValue作转码
+    s.encode4Http()    //为http作转码
+    s.encode4Js()    //为js作转码
+    s.evalExp(opts)    //eval一个表达式
+    s.evalJs(opts)    //eval语句
+    s.format(arg0)    //字符串格式化 //一个常用的功能
+    s.mulReplace(arr)    //多重update
+    s.stripTags()    //去除tag内容
+    s.subByte(len, tail)    //按字节长度截取 //这个在前端截取字符串时很有用，所有的洋框架都没提供这个方法。
+    s.tmpl(opts)    //字符串模板 //字符串模板是一个很实用的功能，后来jquery也加上了。
+    s.trim()    //去两端空格
+
+数组相关：
+    Array.toArray(arr) //将一个ArrayLike对象转化成Array对象
+    arr.clear()    //清空一个数组
+    arr.contains(obj)    //判断数组中是否包含某对象
+    arr.every(callback, pThis)    //按标准扩展
+    arr.expand()    //将一个深层数组展开一层
+    arr.filter(callback, pThis)    //按标准扩展
+    arr.forEach(callback, pThis)    //按标准扩展 //有不少库都提供类似的功能，QWrap提供的与标准基本兼容
+    arr.indexOf(obj, fromIdx)    //按标准扩展
+    arr.lastIndexOf(obj, fromIdx)    //按标准扩展
+    arr.map(callback, pThis)    //按标准扩展
+    arr.reduce(callback, initial)    //按标准扩展
+    arr.reduceRight(callback, initial)    //按标准扩展
+    arr.remove(obj)    //从数组中移除某元素
+    arr.some(callback, pThis)    //按标准扩展
+    arr.unique()    //数组元素除重
+    arr.union(arr2)    //数组求并集
+    arr.intersect(arr2)    //数组求交集
+
+日期相关
+    d.format(pattern)    //日期格式化
+
+十三、全局方法
+QWrap也提供一几个常用的全局方法：
+    namespace(sSpace,root)    //得到命名空间
+    loadJs(url,callback)    //loadJs
+    loadCss(url)    //loadCss
+    use(moduleName,callback)    //按需异步加载
+    g(id)    //根据id得到一个原生的dom对象
+这些方法本来是定义在QW命名空间上的，为了方便调用，把它们上移了一层，放到window下去了。
+
+十四、使用手册
+以上只是一个入门引导，最重要的，当然还是要学会使用手册：
+手册地址：http://dev.qwrap.com/resource/js/_docs/_youa/
+
+入门指南里列出的所有方法，都可以在手册里找到相应的详细用法。
+另外，在所有的方法介绍里，都有该方法前世今生的来龙去脉，如果喜欢深入了解的话，可以看QWrap设计介绍的系列文章。在那些文章里，我们可以看到很多在使用文档里看不到的东西。----因为这个使用文档也只是专门为入门者提供的。
+有兴趣的话，可以去尽情的挖掘吧，如果有什么心得，记得一定要分享出来哦。。。

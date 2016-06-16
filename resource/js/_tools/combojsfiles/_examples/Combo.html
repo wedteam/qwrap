@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Combo Js Files</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../../../../js/apps/assets/base.css" rel="stylesheet" type="text/css" media="screen"/>
+<script type="text/javascript" src="../../../core/core.js"></script>
+<script type="text/javascript">
+ 
+var ComboJsFilesTool=(function(){
+	var ComboJsFilesTool={};
+	function g(id) {
+		return document.getElementById(id);
+	}
+	function trim(s){
+		return s.replace(/^[\s\xa0\u3000]+|[\u3000\xa0\s]+$/g, "");
+	}
+	function read(drvPath)
+	{
+		/*var fso,f;
+		fso = new ActiveXObject("Scripting.FileSystemObject");
+		f = fso.OpenTextFile(drvPath);
+		return (f.readAll())*/
+
+         if(window.ActiveXObject){    
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");    
+            isie = true;    
+         }else if(window.XMLHttpRequest){    
+            xmlHttp = new XMLHttpRequest();    
+         }  
+         try{     
+			 xmlHttp.open("GET", drvPath, false);    
+			 xmlHttp.send(null);    
+			 if(xmlHttp.readyState == 4){            
+				 if (xmlHttp.status == 200 || xmlHttp.status == 0){    
+					return xmlHttp.responseText;   
+				 }    
+			 }      
+         }catch(exception){    
+             document.write('exception:'+exception.message);    
+         }    
+	};
+
+	ComboJsFilesTool.combo=function(){
+		var s = [],
+			files = g('seed').value.match(/\s*document.write.*\n/g),
+			basePath = g('basePath').value;
+		
+		for(var i=0;i<files.length;i++){
+			var sFile=files[i].replace(/\s*/g,'');
+			s.push('\/\/'+trim(files[i])+'\n');
+			sFile=sFile.match(/\'[\w\/.]+\.js/ig);
+			if(sFile) sFile=(sFile+'').substr(1);
+			var content=read(basePath+'/'+sFile)+'';
+			s.push(content + ((/\;\s*$/.test(content))?'\n\n':';\n\n') );
+		}
+
+		g('comboresult').value=s.join('\n');
+	};
+
+	ComboJsFilesTool.open=function(){
+		var appfile = g('appfile').value,
+			seed = g('seed');
+
+		if(!appfile){ 
+			alert("请选择要打开的文件");
+			return false;
+		}
+		g('basePath').value = appfile.replace(/\\(apps|components)\\(.*)/g,"\\");
+		var seed_content = read(appfile);
+		seed.value = seed_content;
+	};
+
+	return ComboJsFilesTool;
+})();
+
+
+
+</script>
+</head>
+
+<body>
+<div id=doc3>
+	<h1 class="page-h1">代码合并. 小工具</h1>
+	<div id=hd>
+		<!-- keep it -->
+	</div>
+	<div id="bd" >
+		<div class="section-ctn">
+		<ul>
+			<li>app file：<br><input type="file" id="appfile" style="width:700px" onchange="ComboJsFilesTool.open()"/></li>
+			<li>根文件夹：<br><input id="basePath" style="width:700px"/></li>
+			<li>内容：<br><textarea id=seed style="width:700px;height:180px" >/* 打开要处理的app文件 */
+			</textarea></li>
+
+			<li>合并：<input type=button value="合并" onclick="ComboJsFilesTool.combo()"/></li>
+			<li>结果：<br><textarea id=comboresult style="width:700px;height:300px" >
+</textarea></li>
+	
+		</ul>
+		</div>
+	</div>
+	<div id="ft">
+		QW
+	</div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,417 @@
+QWrap Tutorial for Beginners
+
+Foreword: To begin using Qwrap, simply include the following js (51K, 17K when compressed):
+<script src="http://dev.qwrap.com/download/latest/apps/qwrap_youa.com.js"></script>
+
+Index
+1. NodeW boxing
+
+NodeW is about boxing DOM nodes.
+
+You can wrap DOM nodes into NodeW boxes, and manipulate nodes inside boxes by calling functions on the boxes.
+
+NodeW is abbreviated as W, namely the first letter of Wrap.
+
+The process of creating a W object is called "W boxing."
+
+Let's look at the different ways to do the boxing:
+  W(document), W(document.body)  //simply box a node
+  W([document), W([docuemnt.body.firstChild, document.body.lastChild]) //simply box multiple nodes
+  W('#myid'), W('#myid div.aaa') //select element(s) via selector matching, and then box them
+  W('<input/>'), W('<li>a</li><li>b</li>') //create element(s) by providing HTML string, and then box them
+Each example above results in a node arrays. The following methods box a single element:
+  W.one(document.body) // box a single node
+  W.one('#id') // box the first element that matches a selector. If none exists an empty object is returned.
+  W.one('<input/><input/>') //create elements(s) and box the first one.
+The selectors mentioned above are CSS selectors.
+
+2. Array Methods
+The result of a W boxing is a NodeW instance. It is an array-like object. It has the following array-like access methods:
+  var w = W('div'); // get all <div> elements in the page and box them
+  w.length // number of nodes
+  w[0] // the first node
+  w.map(function(el){return el.id;}) // 'map' of an array. In this example, get the array of all the ids of the nodes.
+  w.forEach(function(){el.value='a'+Math.random();}) // 'forEach' of an array. This examples gives each node a value.
+  w.toArray() // convert to an array
+  w.first() // box the first node
+  w.last() // box the last node
+  w.item(i) //box the ith node
+
+3. Chainable Methods
+There are many ways you can manipulate a NodeW instance. Each operation (setter or operator) returns the calling box and hence chaining is possible.
+  W('ul').addClass('aaa').show(); // box all <ul> elements, and 'addClass', and then 'show'
+The following methods returns the calling box:
+
+  addClass
+
+  removeClass
+
+  replaceClass
+
+  toggleClass
+
+  show
+
+  hide
+
+  toggle
+
+  setXY
+
+  setSize
+
+  setInnerSize
+
+  setRect
+
+  setInnerRect
+
+  insertAdjacentHTML
+
+  insertAdjacentElement
+
+  insert
+
+  insertTo
+
+  appendChild
+
+  insertSiblingBefore
+
+  insertSiblingAfter
+
+  insertBefore
+
+  insertAfter
+
+  replaceNode
+
+  replaceChild
+
+  removeNode
+
+  empty
+
+  removeChild
+
+  set
+
+  setAttr
+
+  removeAttr
+
+  setValue
+
+  setHtml
+
+  setStyle
+
+  removeStyle
+
+  and so on.
+
+4. Getting Information
+You can get info about boxed nodes via NodeW instances. There are many getter methods on each NodeW instance, such as:
+
+  W('input').getValue() // get the value of the first <input>
+
+  W('input').getValueAll() // get the array of all <input> values
+
+Here are the getter methods:
+
+  outerHTML
+ 
+  getXY
+
+  getXYAll
+ 
+  getSize
+   
+  getSizeAll
+  
+  getRect
+ 
+  getRectAll
+  
+  get
+  
+  getAll
+  
+  getAttr
+  
+  getAttrAll
+
+  getValue
+
+  getValueAll
+    
+  getHtml
+   
+  getHtmlAll
+ 
+  encodeURIForm
+  
+  getStyle
+
+  getStyleAll
+   
+  getCurrentStyle
+  
+  getCurrentStyleAll
+   
+  borderWidth
+   
+  paddingWidth
+   
+  marginWidth
+
+And several boolean getters:
+
+  hasClass
+
+  isVisible
+
+  contains
+
+  isFormChanged
+
+5. gsetter
+Sometimes a getter is paired with a setter, called a gsetter. A gsetter behaves like a getter or a setter according to the number of parameters. For example,
+  W('input').val('aaa').val(); // set value on all <input>s and return the value of the first <inpu>
+Similar gsetter methods include:
+
+  val // getValue or setValue depending on the number of parameters
+
+  html // getHtml or setHtml depending on the number of parameters
+
+  attr // getAttr or setAttr depending on the number of parameters
+
+  css // getCurrentStyle or setValue depending on the number of parameters
+
+  size // getSize or setInnerSize depending on the number of parameters
+
+  xy // getXY or setXY depending on the number of parameters
+
+6. Accessing Relevant Elements
+There are also some methods for accessing relevant elements in the boxed form. For example, 
+W(document.body).query('>div') // get the <div> children of body in a box. Since the returning value is a box, directly invoking NodeW methods on that box is possible.
+
+Methods for accessing relevant nodes:
+
+  query
+
+  getElementsByClass
+
+  nextSibling
+
+  previousSibling
+
+  ancestorNode
+
+  parentNode
+
+  firstChild
+
+  lastChild
+
+  Also, there's cloneNode which is similar. It returns the boxed version of the cloned object.
+
+7. Operating on Nodes
+This section is moved. See Chaining Operation.
+
+8. Event Methods
+A NodeW instance also has a bunch of event methods, such as:
+
+  var w = W('#div1');
+
+  w.on('click', handler) // add an event listener
+
+  w.un('click, handler) // remove an event listener
+
+  w.fire('click') // trigger event listeners
+
+  w.delegate('li','click', handler) // add an event delegate
+
+  w.delegate('li', 'click', handler) // remove an event delegate
+
+9. Jss
+Jss is a new mechanism provided by QWrap that associates js data to nodes. Similar to CSS, we can associate a class of objects with default data.
+Example:
+
+  Jss.addRule('.aaa',{age:10});
+
+  var w=W('<input class="aaa" data-jss"name:\'Tom\'">');
+
+  alert(w.getJss('name')); // Tom
+
+  alert(w.getJss('age')); // 10
+
+10. Dom Static Methods
+QWrap provides a set of Dom static methods, such as:
+
+  Dom.ready(handler, doc) // dom ready
+
+  Dom.query(sSelector, refEl) // get an array of raw nodes
+
+  Dom.create(html, rfrag, doc) // create element(s) by html
+
+  Dom.createElement(tagName, property, doc) // create an element by providing tagName and attributes
+
+  Dom.getDocRect(doc) // get the Rect info from 'doc'
+
+  Dom.isElement(el) // determine whether an object is an element
+
+  Dom.pluckWhiteNode(list) // filter out empty nodes
+
+  Dom.rectContains(rect1, rect2) // determine if one encloses the other
+
+  Dom.rectIntersect(rect1, rect2) // get the intersection of two Rect
+
+11. Static Methods on JS Internal Objects
+QWrap adds many static methods to JS internal objects.
+The following methods are on Object:
+
+  Object.isArray(obj)    // determine if the object is an array
+
+  Object.isArrayLike(obj)    // determine if the object is array-like
+
+  Object.isElement(obj)    // determine if the object is an HTML element
+
+  Object.isFunction(obj)    // ditto
+
+  Object.isObject(obj)    // ditto
+
+  Object.isPlainObject(obj)    // ditto
+
+  Object.isString(obj)    // ditto
+
+  Object.dump(obj, props)    // output specified properties of the object
+
+  Object.fromArray(obj, keys, values)  // extend the object with keys and values
+
+  Object.get(obj, prop, nullSensitive)    // strong get. In certain circumstances, ObjectH.get(obj 'a.b.c.d') can be used in place of obj.a && obj.a.b && obj.a.b.c && obj.a.b.c.d
+
+  Object.keys(obj)    // get keys
+
+  Object.map(obj, fn, thisObj)    // 'map' of an object, just like 'map' of an array
+ 
+  Object.mix(des, src, override)    // mixin
+
+  Object.set(obj, prop, value)    // strong set
+
+  Object.stringify(obj)    // stringify, similar to JSON.stringify but it doesn't have the second parameter.
+
+   Object.values()    // get values
+
+The following methods are on Function:
+
+  Function.bind(func, thisObj) // (forward-compactible standard feature)
+
+  Function.methodize(func, attr) // methodize a static function
+
+  Function.mul(func,opt) // make the method accept array as the first parameter
+
+  Function.createInstance(class) // (forward-compactible standard feature)
+
+  Function.extend(class, p) // class inheritance. This works differently with different library. The implementation is made by 月影 and 好奇  
+
+12. Prototype Methods on JS internal objects
+In Yuoh's use of QWrap, certain JS internal objects are extended and hence polluted for convenience.  This might be favorable or not and hence configurable.
+String related:
+  s.byteLen()  // get the byte length
+
+  s.camelize() // camelize
+
+  s.contains(subStr) // determine if a string contains another
+
+  s.dbc2sbc() // convert full length to half length
+
+  s.decamelize() // anti-camelize
+
+  s.decode4Html() // decode for html
+
+  s.encode4Html() // encode for html
+
+  s.encode4HtmlValue() // encode for htmlValue
+
+  s.encode4Http() // encode for Http
+
+  s.encode4Js() // encode for js
+
+  s.evalExp(opts) // evaluate an expression
+
+  s.evalJs(opts) // evaluate statements
+
+  s.format(arg0) // string formatting // very useful
+
+  s.mulReplace(arr) // multiple update
+
+  s.stripTags() // strip tags
+
+  s.subByte(len, tail) // extract a substring by giving a byte length // This is very useful for string extraction work in front-end, yet none of western frameworks provide this.
+
+  s.templ(opts) // string template // string template is very useful, jquery adds this after Qwrap does so. 
+
+  s.trim() // strip white spaces in both sides
+
+Array related:
+
+  Array.toArray(arr) // turn an Array-like object into an Array object
+
+  arr.clear() // empty an array
+
+  arr.contains(obj) // determine if this array contains the object
+
+  arr.every(callback, pThis) // (forward-compactible standard feature)
+
+  arr.expand() // expand a level of nested arraay
+
+  arr.forEach(callback, pThis) // (forward-compactible standard feature) // Many libraries have similar feature. QWrap is standard-compliant here.
+
+  arr.indexOf(obj, fromIdx)  // (forward-compactible standard feature)
+
+  arr.lastIndexOf(obj, fromIdx)  // (forward-compactible standard feature)
+
+  arr.map(callback, pThis)     // (forward-compactible standard feature)
+
+  arr.reduce(callback, initial)    // (forward-compactible standard feature)
+
+  arr.reduceRight(callback, initial)    // (forward-compactible standard feature)
+
+  arr.remove(obj)    // remove the object from the array
+
+  arr.some(callback, pThis)    // (forward-compactible standard feature)
+
+  arr.unique()    // remove duplicate element in the array
+
+  arr.union(arr2)    // get array union
+
+  arr.intersect(arr2)    // get array intersection
+
+Date related:
+
+  d.format(pattern)    // date formatting
+
+13. Global Methods
+
+QWrap provides several frequently used global methods:
+
+  namespace(sPace, root) // get namesapce
+
+  loadJs(url, callback) // loadJs
+
+  loadCss(url) // loadCss
+
+  use(moduleName, callback) // asynchronous loading based on neeeds
+
+  g(id) // get native dom object by id
+
+This methods were originally defined on QW namespace, but they were moved one level up, directly under window, for easy use.
+
+14. Manual
+This is an introductory guide. What's important is to learn how to use the manual:
+Manual location: http://dev.qwrap.com/resource/js/_docs/_youa/
+
+All methods listed in this tutorial are available in details in the manual.
+Also, all the explanations of methods include the history of the method. If you are interested, see the series about QWrap design. You can see lots of information in those articles, which is not available in the manual -- the manual itself is also for beginners.
+Dig as much information as you like, if you are interested! Share comments when you have them!

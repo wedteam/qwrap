@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Anim Demo</title>
+	<link href="../../../apps/assets/base.css" rel="stylesheet" type="text/css" media="screen"/>
+	<style>
+	body {line-height:1.8;}
+	li {padding-left:2em;}
+	li label {width:120px;display: -moz-inline-box; display: inline-block;text-align:right;background-color:#ccc;}
+	.evalSpan {color:#00f;cursor:pointer;}
+	</style>
+	<script type="text/javascript" src="../../../apps/core_dom_youa.js"></script>
+	<script type="text/javascript" src="../anim.js"></script>
+</head>
+<body>
+<div id=doc3>
+	<div id="bd" >
+		<div class="section-ctn">
+			<h3 class="section-hd" onclick="W(this).nextSibling('div').slideToggle(300);" >Anim基础类：---不推荐直接使用 <span style="padding-left:100px;color:blue;">点击展开详情</span></h3>
+			<div style="overflow:hidden;display:none;">
+			<div style="padding-left:30px;">
+<pre>/**
+ * @class Anim 基础动画
+ * @namespace QW
+ * @constructor
+ * @param {function} animFun - 管理动画效果的闭包
+ * @param {int} dur - 动画效果持续的时间 
+ * @param {json} opts - 其它参数， 
+	---目前只支持以下参数：
+	{boolean} byStep (Optional) 是否按帧动画（即"不跳帧"）。如果为true，表示每一帧都走到，帧数为dur/frameTime
+	{boolean} frameTime (Optional) 帧间隔时间。默认为28（约一秒36帧）
+	{boolean} per (Optional) 初始播放进度
+	{function} onbeforeplay (Optional) onbeforeplay事件
+	{function} onplay (Optional) onplay事件
+	{function} onstep (Optional) onstep事件
+	{function} onpause (Optional) onpause事件
+	{function} onresume (Optional) onresume事件
+	{function} onend (Optional) onend事件
+	{function} onreset (Optional) onreset事件
+ * @returns {Anim} anim - 动画对象
+ */
+</pre>
+<pre>/* 原型方法有：
+	isPlaying() 判断是否正在播放 -----returns {boolean}  
+	play() 从0开始播放 ----returns {boolean} 是否开始顺利开始。（因为onbeforeplay有可能阻止了play） 
+	step(per) 播放一帧，参数per为[0,1]区间内的数值，为可选，表示播放到某进度
+	end() 播放到最后
+	pause() 暂停播放
+	resume() 继续播放
+	reset() 播放到最开始
+*/
+</pre>
+			</div>
+			<button onclick="eval(g('code1').value);" id="evalBtn">运行以下textarea里的代码</button>
+			<br/>
+			<textarea id="code1" style="width:750px;height:200px;">var i=0;
+new QW.Anim(function(){document.title=i++;},3000,{frameTime:100,onend:function(){alert('结束');}}).play();
+
+			</textarea>
+			</div>
+		</div>
+
+		<div class="section-ctn">
+			<h3 class="section-hd" onclick="W(this).nextSibling('div').slideToggle(600);" >动画算子：---可以了解一下，在元素动画中可能用到 <span style="padding-left:100px;color:blue;">点击展开详情</span></h3>
+			<div style="overflow:hidden;display:none;">
+			<div style="padding-left:30px;">
+				说明：基础动画是基于时间轴的，时间进度是从0到1的一个匀速变化过程。<br/>
+				有时候需要非匀速的效果，可以由算子来对进度per作一个转化，来达到非匀速的效果。<br/>
+				参见：
+				<ul>
+					<li><a href="easing.html">动画类算子-运动轨迹</a></li>
+					<li><a href="anim_bystep.html">动画类算子-时间与坐标</a></li>
+				</ul>
+			</div>
+			</div>
+		</div>
+
+		<div class="section-ctn">
+			<h3 class="section-hd" onclick="W(this).nextSibling('div').slideToggle();" >针对节点元素的动画：---建议了解一下，有时候会用到 <span style="padding-left:100px;color:blue;">点击展开详情</span></h3>
+			<div style="overflow:hidden;">
+			<div style="padding-left:30px;">
+				<p>以下是针对节点元素的动画的几种使用场景，用法完全一致：new ElAnim(el, attrs, dur, easing)。<br />不同场景可以组合使用（例如进行颜色变换的同时也可以改变宽度，等等），具体参见实例：</p>
+				<ul>
+					<li>
+						针对元素的“opacity或以px为单位的样式”的动画。使用场景如：
+						<a href="ball.html">CSS动画-跳动的小球</a>、
+						<a href="elanim_rect.html">大小位置动画</a>
+					</li>
+					<li>
+						针对元素的“颜色性质的样式”的动画。使用场景如：
+						<a href="color.html">颜色渐变</a>
+					</li>
+					<li>
+						针对元素的“scroll”的动画。使用场景如：
+						<a href="scroll_page.html">滚屏翻页</a>、
+						<a href="scroll_coda.html">类coda效果</a>、
+						<a href="scroll_home.html">回到首页</a>
+					</li>
+				</ul>
+			</div>
+			</div>
+		</div>
+
+		<div class="section-ctn">
+			<h3 class="section-hd" onclick="W(this).nextSibling('div').slideToggle();" >几种retouch后的用法：<span style="padding-left:100px;color:blue;">点击展开详情</span></h3>
+			<div style="overflow:hidden;">
+			<div style="padding-left:30px;">
+				<p>在QW.NodeW添加一些扩展方法，<strong>执行这些方法都会暂停之前的动画（new ElAnim添加的动画不受影响）</strong>，方便用户调用，包括：</p>
+<pre>
+	W(el).animation(attrs, dur, callback, easing) //通用动画
+	W(el).fadeIn(dur, callback, easing) //淡入
+	W(el).fadeOut(dur, callback, easing) //淡出
+	W(el).fadeToggle(dur, callback, easing) //淡入/淡出切换 
+	W(el).slideUp(dur, callback, easing) //收起
+	W(el).slideDown(dur, callback, easing) //展开
+	W(el).slideToggle(dur, callback, easing) //收起/展开切换
+	W(el).shine4Error(dur, callback, easing) //颜色渐变提醒注意
+
+	W(el).stop(clearQueue, gotoEnd) //停止动画，clearQueue:bool 是否清空播放队列；gotoEnd:bool 是否直接播放到最后一帧并调用onend，否则只是暂停播放
+
+	W(el).sleep(dur) //等待，用于动画队列播放延时，如：W(el).sleep(1000).fadeOut(true);1s后再fadeOut
+</pre>				<p>参数说明：
+					<ul>
+						<li><strong>attrs</strong>，需要改变的属性集合；</li>
+						<li><strong>dur</strong>，动画时长（单位ms，默认400）；</li>
+						<li><strong>callback</strong>，动画完成时回调；</li>
+						<li><strong>easing</strong>，动画算子；</li>
+						<li><strong>sequence</strong>，是否顺序执行动画，这个参数可出现在任何位置（bool，默认false，需要Async组件支持）。<a href="../_tests/retouched_test2.html">示例</a></li>
+					</ul>
+					除了<strong>attrs</strong>，其它参数可选。</p>
+				<p>attrs参数示例：{height : {from : '1px', to : '100px', end : '50px'}, width: {by : '-100px'}} 或 {height : '100px'}（等于{height : {to : '100px'}}）</p>
+				<ul>
+					<li>
+						<span class="evalSpan">W('#fadeTestDiv').fadeOut()</span> &nbsp;&nbsp;&nbsp;
+						<span class="evalSpan">W('#fadeTestDiv').fadeIn()</span> &nbsp;&nbsp;&nbsp;
+						<span class="evalSpan">W('#fadeTestDiv').fadeToggle()</span> &nbsp;&nbsp;&nbsp;
+						<div id="fadeTestDiv" style="background-color:#ccc;zoom:1;">天王盖地虎，<br/>宝塔镇河妖。</div>
+					</li>
+					<li>
+						<span class="evalSpan">W('#slideTestDiv').slideUp()</span> &nbsp;&nbsp;&nbsp;
+						<span class="evalSpan">W('#slideTestDiv').slideDown()</span> &nbsp;&nbsp;&nbsp;
+						<span class="evalSpan">W('#slideTestDiv').slideToggle()</span> &nbsp;&nbsp;&nbsp;
+						<div class="slide" id="slideTestDiv" style="overflow:hidden;background-color:#ccc">天下太平，<br/>江山永固。</div>
+					</li>
+					<li>
+						<span class="evalSpan">W('#shineTestDiv').shine4Error().focus()</span> &nbsp;&nbsp;&nbsp;
+						<input id="shineTestDiv"  value="">
+					</li>
+					<li>
+						<span class="evalSpan">W('#animTestDiv').animate({backgroundColor:'#0f0', width:'500px'})</span><br />
+						<span class="evalSpan">W('#animTestDiv').animate({backgroundColor:'#f00', width:'50px'})</span>
+						<div id="animTestDiv" style="width:50px;background-color:#f00;height:50px"></div>
+					</li>
+				</ul>
+			</div>
+			</div>
+		</div>
+
+
+
+	</div>
+	<div id="ft">
+		QWrap (<a href="http://www.qwrap.com">www.qwrap.com</a>)
+	</div>
+
+</div>
+<script>
+W('body').delegate('.evalSpan','click',function(){eval(this.innerHTML);});
+</script>
+</body>
+</html>

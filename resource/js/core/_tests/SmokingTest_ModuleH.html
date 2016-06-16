@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>QW: SmokingTest</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../../apps/assets/base.css" rel="stylesheet" type="text/css" media="screen"/>
+<script type="text/javascript" src="../../core/core.js"></script>
+<script>
+QW.ModuleH.addConfig({
+	Youa: {
+		url: '//apps/youa_retouch.js',
+		requires: 'Dom'
+	},
+	Selector:{
+		url: '//dom/selector.js'
+	},
+	DomU:{
+		url: '//dom/dom.u.js',
+		requires: 'Selector'
+	},
+	NodeH:{
+		url: '//dom/node.h.js',
+		requires: 'Selector'
+	},
+	EventH:{
+		url: '//dom/event.h.js'
+	},
+	EventTargetH:{
+		url: '//dom/eventtarget.h.js'
+	},
+	NodeC:{
+		url: '//dom/node.c.js'
+	},
+	NodeW:{
+		url: '//dom/node.w.js'
+	},
+	Jss:{
+		url: '//dom/jss.js'
+	},
+	Dom: {
+		url: '//dom/dom_retouch.js',
+		requires:'Selector,DomU,NodeH,EventH,EventTargetH,NodeC,NodeW,Jss'
+	}
+});
+
+</script>
+
+
+<script type="text/javascript" src="../../_tools/smokingtest/SmokingTest.js"></script>
+<link href="../../_tools/smokingtest/assets/page.css" rel="stylesheet" type="text/css" media="screen"/>
+</head>
+
+<body>
+<div id=doc3>
+	<h1 class="page-h1">QW module.h.js 冒烟测试</h1>
+	<div id=hd>
+		<!-- keep it -->
+	</div>
+	<div id="bd" >
+		<div class="section-ctn" id="ST_ctn">
+		</div>
+	</div>
+	<div>
+
+<hr/>
+<pre>
+&nbsp;
+</pre>
+</pre>
+	</div>
+	<div id="ft">
+		QW 
+	</div>
+</div>
+
+<script>
+SmokingTest.init(document.getElementById('ST_ctn'),['QW'],'QW.ModuleH.use("Youa,Dom",function(){alert(1);W(\'textarea\').css(\'color\',\'red\')});\nQW.ModuleH.use("Youa,Dom",function(){alert(2);W(\'textarea\').css(\'color\',\'blue\')});');
+</script>
+</body>
+</html>

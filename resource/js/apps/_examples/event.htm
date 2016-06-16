@@ -1,0 +1,17 @@
+<script type="text/javascript" src="../../apps/core_dom_youa.js"></script>
+data--ban="5000":<button data--ban="5000">测试</button><br/>
+onchange代理：<input ><input type=checkbox><select><option value="1">1<option value="2">2</select>
+<script type="text/javascript">
+var W=QW.NodeW;
+W('button').on('click', function () {
+	alert('lazy');
+});
+W('body').delegate('input,textarea,select','change',function(){document.title=this.value});
+W('body').delegate('tr','mouseenter',function(e){this.style.backgroundColor='red';document.title=Math.random();});
+W('body').delegate('tr','mouseleave',function(e){this.style.backgroundColor='';document.title=Math.random();});
+</script>
+<table cellspacing=0 cellpadding=0 border=1>
+<tr><td>aaa</td><td>aaa<font color=blue>test</font></td></tr>
+<tr><td>aaa</td><td>aaa<font color=blue>test</font></td></tr>
+<tr><td>aaa</td><td>aaa<font color=blue>test</font></td></tr>
+</table>

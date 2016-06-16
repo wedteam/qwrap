@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="stylesheet" href="../assets/page.css" type="text/css" media="screen">
+	
+	<script type="text/javascript">
+window.SpeedMatchConfig={
+	players:[
+		{
+			title:'Pure Dom',
+			url:'./domfiles/pure.htm'
+		},
+		{
+			title:'MooTools 1.2.4',
+			url:'./domfiles/mootools.htm'
+		},
+		{
+			title:'JQuery 1.4.2',
+			url:'./domfiles/jquery.htm'
+		},
+		{
+			title:'Prototype 1.7.2',
+			url:'./domfiles/prototype.htm'
+		},
+		{
+			title:'YUI 3.1.1',
+			url:'./domfiles/yui.htm'
+		},
+		{
+			title:'Dojo 1.2.0b1',
+			url:'./domfiles/dojo.htm'
+		},
+		{
+			title:'QW Youa Retouched',
+			url:'./domfiles/qwyoua.htm'
+		}
+	],
+	cases:'on,un,getAttr,setAttr,getStyle,setStyle,finale'.split(',')
+};
+
+	</script>
+	
+	<script src="../SpeedMatch.js" type="text/javascript"></script>
+
+</head>
+<body>
+	
+<div id=doc3>
+
+<div id='container' >
+</div>
+<script type="text/javascript">
+SpeedMatch.init(document.getElementById('container'));
+</script>
+
+<h2>speed/validity selectors test for frameworks.</h2>
+<p>Every framework runs in his own iFrame, thus no conflicts can happen. </p>
+<p>Tests are run in a neutral environment, no library or framework is included in the main javascript test, to avoid favoritism.</p>
+
+<p>Tests are run against a local copy of <a href="http://www.w3.org/TR/2001/CR-css3-selectors-20011113/">this document</a>.</p> 
+
+
+
+<div id="footer">
+	<p class="footer">copyright &copy; 2007 <a href="http://mootools.net">http://mootools.net</a> | MIT License | <a href="http://slickspeed.googlecode.com/svn/trunk">download from googlecode</a></p>
+</div>
+
+</div>
+
+</body>
+</html>

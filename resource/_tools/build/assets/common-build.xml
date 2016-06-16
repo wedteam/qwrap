@@ -1,0 +1,114 @@
+<project name="common-build" basedir="." xmlns:ac="antlib:net.sf.antcontrib">
+	<description>Common Build File</description>
+
+	<dirname property="current.dir" file="${ant.file.common-build}"/>
+	<property name="root.dir" location="${current.dir}/../"/>
+
+	<property name="tmp.dir" location="${root.dir}/output/tmp/"/>
+	<property name="yc.jar" location="${current.dir}/yuicompressor.jar"/>
+
+	<property name="charset" value="utf-8"/>
+	<property name="version" value="1.1.6"/>
+    <tstamp>
+      <format property="release" pattern="yyyy-MM-dd" locale="en,UK"/>
+    </tstamp>
+
+	<!-- 清空、复制等准备工作 -->
+	<target name="prepare">
+		<delete dir="${root.dir}/output/"/>
+		<mkdir dir="${tmp.dir}"/>
+		<copy todir="${tmp.dir}">
+			<fileset dir="${module.dir}" includes="*-combo.js"/>
+		</copy>
+
+		<!-- 脚本库的版本号 -->
+		<replaceregexp match="\$version\$"
+					   replace="${version}"
+					   flags="g"
+					   encoding="${charset}">
+			<fileset dir="${tmp.dir}" includes="*-combo.js"/>
+		</replaceregexp>
+
+		<!-- 脚本库的发布号（小版本） -->
+		<replaceregexp match="\$release\$"
+					   replace="${release}"
+					   flags="g"
+					   encoding="${charset}">
+			<fileset dir="${tmp.dir}" includes="*-combo.js"/>
+		</replaceregexp>
+
+		<!-- 保存 debug 版本 -->
+		<copy todir="${tmp.dir}">
+			<fileset dir="${tmp.dir}"/>
+			<mapper type="regexp"
+				  from="^(.*?)(?:-combo)?\.(css|js)$"
+				  to="\1_debug.\2"/>
+		</copy>
+	</target>
+
+	<!-- 压缩代码 -->
+	<target name="compress">
+		<!-- 用 YUICompressor 压缩 js -->
+		<apply executable="java" verbose="true" dir="${tmp.dir}">
+			<arg line="-jar"/>
+			<arg path="${yc.jar}"/>
+			<arg line="--charset ${charset}"/>
+			<arg line="-o "/>
+			<targetfile/>
+			<fileset dir="${tmp.dir}" includes="*-combo.js"/>
+			<mapper type="regexp"
+			  from="^(.*?)(?:-combo)?\.(css|js)$"
+			  to="output/tmp/\1.\2"/>
+		</apply>
+
+		<delete>
+			<fileset dir="${tmp.dir}" includes="*-combo.js"/>
+		</delete>
+	</target>
+
+	<!-- 给文件加上版权信息 -->
+	<target name="copyright">
+		<mkdir dir="${tmp.dir}/cp"/>
+		<move todir="${tmp.dir}/cp">
+			<fileset dir="${tmp.dir}" includes="*.js,*.css" excludes="*_debug.js" />
+		</move>
+
+		<ac:for param="file">
+			<path>
+				<fileset dir="${tmp.dir}/cp" />
+			</path>
+			<sequential>
+				<concat destfile="@{file}.tmp" encoding="${charset}"
+					outputencoding="${charset}">
+					<header filtering="no" trimleading="yes">/* QWrap-QiWu ${version}(${release}) */
+					</header>
+					<fileset file="@{file}"/>
+				</concat>
+				<move file="@{file}.tmp" tofile="@{file}"/>
+			</sequential>
+		</ac:for>
+
+		<move todir="${tmp.dir}">
+			<fileset dir="${tmp.dir}/cp" />
+		</move>
+		<delete dir="${tmp.dir}/cp"/>
+	</target>
+
+	<!-- 扫尾工作 -->
+	<target name="destroy">
+		<move todir="${tmp.dir}/../">
+			<fileset dir="${tmp.dir}" includes="*.js,*.css"/>
+		</move>
+		<delete dir="${tmp.dir}"/>
+	</target>
+
+	<!-- 拷贝release到其他文件夹 -->
+	<target name="distribute">
+		<copy file="${root.dir}/output/qwrap_qiwu_full_debug.js" tofile="${js.dir}/_docs/_youa/js/apps/qwrap.js" />
+		<copy file="${root.dir}/output/qwrap_qiwu_full_debug.js" tofile="${js.dir}/apps_qiwu/qwrap_qiwu_combo.js" />
+	</target>
+
+	<target name="common.build"
+		  depends="prepare,compress,copyright,destroy,distribute">
+	</target>
+</project>

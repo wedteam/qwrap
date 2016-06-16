@@ -1,0 +1,96 @@
+<project name="qwrap.build" default="build" basedir=".">
+	<description>QWrap Build File</description>
+	<!--build.xml部分代码来自SeaJS(seajs.com)，致谢！-->
+
+	<dirname property="build.dir" file="${ant.file}"/>
+	<property name="module.dir" location="${build.dir}"/>
+	<property name="js.dir" location="${build.dir}../../../js/"/>
+
+	<import file="assets/common-build.xml"/>
+
+	<target name="concat">
+		<concat destfile="qwrap_qiwu-combo.js"
+				encoding="${charset}"
+				outputencoding="${charset}">
+
+			<path path="${js.dir}/core/core_base.js"/>
+			<path path="${js.dir}/core/module.h.js"/>
+			<path path="${js.dir}/core/browser.js"/>
+			<path path="${js.dir}/core/string.h.js"/>
+			<path path="${js.dir}/core/object.h.js"/>
+			<path path="${js.dir}/core/array.h.js"/>
+			<path path="${js.dir}/core/hashset.h.js"/>
+			<path path="${js.dir}/core/date.h.js"/>
+			<path path="${js.dir}/core/function.h.js"/>
+			<path path="${js.dir}/core/class.h.js"/>
+			<path path="${js.dir}/core/helper.h.js"/>
+			<path path="${js.dir}/core/json.js"/>
+			<path path="${js.dir}/core/custevent.js"/>
+
+			<path path="${js.dir}/dom/selector.js"/>
+			<path path="${js.dir}/dom/dom.u.js"/>
+			<path path="${js.dir}/dom/node.h.js"/>
+			<path path="${js.dir}/dom/node.w.js"/>
+			<path path="${js.dir}/dom/event.h.js"/>
+			<path path="${js.dir}/dom/eventtarget.h.js"/>
+			<path path="${js.dir}/dom/jss.js"/>
+			<path path="${js.dir}/dom/node.c.js"/>
+
+			<path path="${js.dir}/core/core_retouch.js"/>
+			<path path="${js.dir}/dom/dom_retouch.js"/>
+			<path path="${js.dir}/apps_qiwu/qiwu_retouch.js"/>
+		</concat>
+
+		<concat destfile="qwrap_qiwu_full-combo.js"
+				encoding="${charset}"
+				outputencoding="${charset}">
+
+			<path path="${js.dir}/core/core_base.js"/>
+			<path path="${js.dir}/core/module.h.js"/>
+			<path path="${js.dir}/core/browser.js"/>
+			<path path="${js.dir}/core/string.h.js"/>
+			<path path="${js.dir}/core/object.h.js"/>
+			<path path="${js.dir}/core/array.h.js"/>
+			<path path="${js.dir}/core/hashset.h.js"/>
+			<path path="${js.dir}/core/date.h.js"/>
+			<path path="${js.dir}/core/function.h.js"/>
+			<path path="${js.dir}/core/class.h.js"/>
+			<path path="${js.dir}/core/helper.h.js"/>
+			<path path="${js.dir}/core/json.js"/>
+			<path path="${js.dir}/core/custevent.js"/>
+
+			<path path="${js.dir}/dom/selector.js"/>
+			<path path="${js.dir}/dom/dom.u.js"/>
+			<path path="${js.dir}/dom/node.h.js"/>
+			<path path="${js.dir}/dom/node.w.js"/>
+			<path path="${js.dir}/dom/event.h.js"/>
+			<path path="${js.dir}/dom/eventtarget.h.js"/>
+			<path path="${js.dir}/dom/jss.js"/>
+			<path path="${js.dir}/dom/node.c.js"/>
+
+			<path path="${js.dir}/core/core_retouch.js"/>
+			<path path="${js.dir}/dom/dom_retouch.js"/>
+			<path path="${js.dir}/apps_qiwu/qiwu_retouch.js"/>
+
+			<path path="${js.dir}/components/async/async.h.js"/>
+			<path path="${js.dir}/components/async/async_retouch.js"/>
+
+			<path path="${js.dir}/components/ajax/ajax.js"/>
+			<path path="${js.dir}/components/ajax/ajax_retouch.js"/>
+
+			<path path="${js.dir}/components/anim/anim_base.js"/>
+			<path path="${js.dir}/components/anim/elanim.js"/>
+			<path path="${js.dir}/components/anim/easing.js"/>
+			<path path="${js.dir}/components/anim/anim_retouch.js"/>
+		</concat>
+	</target>
+
+	<target name="finish">
+		<delete>
+			<fileset dir="${module.dir}" includes="*-combo.js"/>
+		</delete>
+		<echo>finish!</echo>
+	</target>
+
+	<target name="build" depends="concat,common.build,finish" />
+</project>

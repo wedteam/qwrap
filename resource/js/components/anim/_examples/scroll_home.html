@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>页面滚动条---Jerry Qu</title>
+	<script type="text/javascript" src="../../../apps/core_dom_youa.js"></script>
+	<script type="text/javascript" src="../../../components/anim/anim.js"></script>
+    <style type="text/css" title="default" media="screen">
+    /*<![CDATA[*/
+
+    /*]]>*/
+    </style>
+    </head>
+	<body>
+		<h3>点击方块</h3>
+		<div id="test1" style="cursor:pointer;width:50px;height:50px;background-color:#ccc;border:#333"></div>
+		<div style="height:2647px;background:url(img/bg.png) no-repeat"></div>
+		<div id="test2" style="cursor:pointer;width:50px;height:50px;background-color:#ccc;border:#333"></div>
+		<script type="text/javascript">
+			//anim3Scroll
+			var ElAnim = QW.ElAnim,
+				Dom = QW.Dom,
+				NodeW = QW.NodeW,
+				g = Dom.g;
+			window.onload = function(){
+				var doc = Browser.webkit ? document.body : document.documentElement;
+
+				//addEventlistener
+				g("test1").onclick = function(){
+					var pos = Dom.getDocRect();
+
+					var anim1 = new ElAnim(doc, {
+						"scrollTop" : {
+							to : pos.scrollHeight - pos.height
+						}
+					}, 2000, QW.Easing.easeBothStrong);
+
+					anim1.play();
+				};
+				g("test2").onclick = function(){
+					var anim2 = new ElAnim(doc, {
+						"scrollTop" : {
+							to : 0
+						}
+					}, 2000, QW.Easing.easeBothStrong);
+
+					anim2.play();
+				};
+			};
+		</script>
+	</body>
+</html>

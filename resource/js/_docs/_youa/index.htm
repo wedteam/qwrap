@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<title>QWrap 有啊版应用手册</title>
+		<script>
+			window.onload = function(){
+				var hash = location.hash.replace('#', ''),
+					frame = document.getElementById('contents');
+
+				if(hash) {
+					frame.src = location.href.replace(/(\/index.htm|\/)#.*/img,'') + hash;
+				} else {
+					frame.src = 'content.htm';
+				}
+				window.onload = null;
+			};
+		</script>
+	</head>
+	<frameset cols="20%,80%">
+		<frame name="side" src="side.htm">
+		<frame name="contents" id="contents" src="about:blank">		
+		<noframes>
+			<body>
+			<p>This page uses frames, but your browser doesn't support them.</p>
+			</body>
+		</noframes>
+	</frameset>
+</html>

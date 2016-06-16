@@ -1,0 +1,23 @@
+.ST_outer_tbl ul,.ST_outer_tbl li {list-style:none; padding:0;margin:0;}
+.ST_outer_tbl li {list-style:none; }
+/*--== container ==--*/
+#ST_tree-wrap {text-align:left;height:550px;width:250px;white-space:nowrap;overflow:auto;}
+#ST_tree-wrap ul {margin-left:6px; padding-left:12px; }
+.ST_node-ctn {display:inline}
+.ST_folder-closed {}
+.ST_folder-open {}
+.ST_img-open {background:url(./open.gif) no-repeat center left; width:18px; display:-moz-inline-box;display:inline-block;cursor:pointer;}
+.ST_img-closed {background:url(./closed.gif) no-repeat center left; width:18px; display:-moz-inline-box;display:inline-block;cursor:pointer;}
+.ST_sConstructor {padding:0 5px;font-size:10px;}
+.ST_summary{display:none}
+#ST_msg{width: 680px; height: 350px;overflow:auto;margin:5px 0 25px 0;border:solid #ccc 1px;border-width:1px 0;}
+#ST_jscode{width: 680px; height: 100px;}
+#ST_outer_tbl{border:0;}
+#ST_tree-ctn-outer {border-right: solid #ccc 1px;width:255px;}
+#ST_var {width:300px}
+.ST_M_sumary {font-weight:bold;background-color:#eee}
+.ST_M_value {background-color:#eee;white-space:nowrap;}
+.ST_M_subnode-ctn {border-top:solid #ccc 1px;}
+.ST_M_lastkey {width:110px;display:inline-block;}
+.ST_M_sConstructor{margin:0 10px;}
+.ST_M_subnode-ctn .ST_M_summary {display:block;padding-left:120px;}
